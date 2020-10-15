@@ -1,12 +1,13 @@
 package com.wu.common.core.garden;
 
-import com.wu.common.core.garden.Company;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 /**
  * @author nullacc
@@ -26,7 +27,7 @@ public class Tree {
     private Integer annualOutput;
 
     @ApiModelProperty(value = "company belonged", name = "originCompany")
-    private Company originCompany;
+    private Garden originCompany;
 
     @ApiModelProperty(value = "origin location", name = "location")
     private String location;
@@ -51,4 +52,13 @@ public class Tree {
 
     @ApiModelProperty(value = "fruit of this tree", name = "fruit")
     private Fruit fruit;
+
+    @ApiModelProperty(value = "price per piece", name = "treePrice")
+    public BigDecimal treePrice;
+
+    @ApiModelProperty(value = "", name = "authorityYear")
+    public Integer authorityYear;
+
+    @ApiModelProperty(value = "amount of fruit on this tree", name = "amountOfFruit")
+    public Integer amountOfFruit;
 }

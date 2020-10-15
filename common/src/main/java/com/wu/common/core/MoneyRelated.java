@@ -1,6 +1,6 @@
 package com.wu.common.core;
 
-import com.wu.common.core.customer.Customer;
+import com.wu.common.core.customer.CustomerInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -21,8 +21,8 @@ import java.math.BigDecimal;
 @ApiModel(value = "money related actions")
 public class MoneyRelated {
 
-    @ApiModelProperty(value = "operation on customer", name = "customer")
-    public Customer customer;
+    @ApiModelProperty(value = "operation on customerInfo", name = "customerInfo")
+    public CustomerInfo customerInfo;
 
     @ApiModelProperty(value = "withdraw amount", name = "withdrawAmount")
     public BigDecimal withdrawAmount;

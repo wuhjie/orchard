@@ -17,9 +17,9 @@ import lombok.Setter;
 
 public class Gift {
 
-    public Customer sender;
+    public CustomerInfo sender;
 
-    public Customer receiver;
+    public CustomerInfo receiver;
 
     public Tree tree;
 

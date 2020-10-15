@@ -34,4 +34,6 @@ public class Wallet {
     @ApiModelProperty(value = "order record of this account", name = "records")
     public List<Record> records;
 
+    @ApiModelProperty(value = "credits on account", name = "customerCredits")
+    public BigDecimal customerCredits;
 }

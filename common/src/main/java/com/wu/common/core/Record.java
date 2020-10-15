@@ -1,7 +1,7 @@
 package com.wu.common.core;
 
-import com.wu.common.core.customer.Customer;
-import com.wu.common.core.garden.Company;
+import com.wu.common.core.customer.CustomerInfo;
+import com.wu.common.core.garden.Garden;
 import com.wu.common.core.garden.Tree;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -32,10 +32,10 @@ public class Record extends Order{
     public String orderTime;
 
     @ApiModelProperty(value = "order related company", name = "company")
-    public Company company;
+    public Garden company;
 
-    @ApiModelProperty(value = "order related customer", name = "customer")
-    public Customer customer;
+    @ApiModelProperty(value = "order related customerInfo", name = "customerInfo")
+    public CustomerInfo customerInfo;
 
     @ApiModelProperty(value = "order related tree", name = "orderedTree")
     public Tree orderedTree;
