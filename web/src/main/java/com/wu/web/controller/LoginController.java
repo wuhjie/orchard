@@ -1,6 +1,6 @@
 package com.wu.web.controller;
 
-import com.wu.common.interfaces.LoginInterface;
+//import com.wu.common.interfaces.LoginInterface;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -16,9 +16,9 @@ todo: corresponding html page
  */
 
 @Controller
-public class LoginController implements LoginInterface {
+public class LoginController  {
 
-    @Override
+
     @GetMapping("/user/login")
     public String login (
             @RequestParam("username") String username,
@@ -35,7 +35,7 @@ public class LoginController implements LoginInterface {
         }
     }
 
-    @Override
+
     @RequestMapping("/user/logout")
     public String logout(HttpSession session) {
         session.invalidate();

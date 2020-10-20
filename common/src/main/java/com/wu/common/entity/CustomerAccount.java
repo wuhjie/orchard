@@ -1,27 +1,27 @@
 package com.wu.common.entity;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 /**
- * @author nullacc
+ * @author wuhjie
  */
 @Builder
 @Entity
-@Table()
-@SQLDelete(sql = "")
+@Table(name = "customerAccount", indexes = {@Index(name = "customer", unique = true, columnList = "account")})
+@SQLDelete(sql = "update accountCustomer set deketed = 1 where account = ?")
 @Where(clause = "deleted = 0")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class CustomerAccount {
+@Accessors(chain = true)
+public class CustomerAccount extends AbstractEntity{
 
     @Column(name = "account", nullable = false, updatable = false, length = 20)
     private String customerId;
@@ -31,6 +31,11 @@ public class CustomerAccount {
 
     @Column(name = "tel", length = 11)
     private String tel;
+    @Id
+    private String id;
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
 }
