@@ -12,23 +12,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 @ApiModel(value = "customerInfo")
 public class CustomerInfo {
 
     @ApiModelProperty(value = "nickname on the platform", name = "nickname")
-    private String nickname;
+    private Integer customerId;
 
     @ApiModelProperty(value = "level of customerInfo", name = "customerLevel")
     private Integer customerLevel;
 
-    @ApiModelProperty(value = "company that customerInfo follows", name = "followingCompanies")
-    private List<Garden> followingCompanies;
+//    @ApiModelProperty(value = "company that customerInfo follows", name = "followingCompanies")
+//    private List<Garden> followingCompanies;
 
     @ApiModelProperty(value = "trees that customerInfo follows", name = "followingTrees")
     private List<Tree> followingTrees;
@@ -54,25 +55,12 @@ public class CustomerInfo {
     @ApiModel(value = "personal info for customerInfo")
     public static class CustomerPersonalInfo {
 
-        private String name;
-
-        private String wechatId;
+        private String tel;
 
         private Wallet personalWallet;
 
         private List<Order> orderHistory;
 
-
-    }
-
-
-    public CustomerInfo(String nickname, Integer customerLevel, List<Garden> followingCompanies, List<Tree> followingTrees, List<Order> orderHistory, List<Tree> sentTrees, List<Tree> ownedTrees) {
-        this.nickname = nickname;
-        this.customerLevel = customerLevel;
-        this.followingCompanies = followingCompanies;
-        this.followingTrees = followingTrees;
-        this.orderHistory = orderHistory;
-        this.sentTrees = sentTrees;
-        this.ownedTrees = ownedTrees;
+        private Set<String> tokens;
     }
 }
