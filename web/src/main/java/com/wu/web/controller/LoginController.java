@@ -1,6 +1,6 @@
 package com.wu.web.controller;
 
-//import com.wu.common.interfaces.LoginInterface;
+import com.wu.common.interfaces.LoginInterface;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -18,20 +18,19 @@ todo: corresponding html page
 @Controller
 public class LoginController  {
 
-
-    @GetMapping("/user/login")
+    @RequestMapping("/user/login")
     public String login (
             @RequestParam("username") String username,
             @RequestParam("password") String password,
             Model model, HttpSession session) {
         if (!StringUtils.isEmpty(username) && "123".equals(password)) {
-            session.setAttribute("loginUser", username);
-            return null;
+            session.setAttribute("user", username);
+            return "redirect:/main.html";
         }
 
         else {
             model.addAttribute("msg", "wrong");
-            return null;
+            return "index";
         }
     }
 
@@ -39,7 +38,7 @@ public class LoginController  {
     @RequestMapping("/user/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return null;
+        return "redirect:/index.html";
     }
 
 }

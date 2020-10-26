@@ -11,8 +11,6 @@ import com.wu.common.utils.JwtTokenUtil;
 import com.wu.core.RequestContextHolder;
 import com.wu.core.repository.UserAccountRepository;
 import com.wu.core.service.CustomerAccountService;
-import io.swagger.annotations.Api;
-import io.swagger.oas.models.security.SecurityScheme;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -90,6 +88,7 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
 
 
     }
+
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public ApiResponse forgetPassword(String phone, String smsCode, String firstPassword, String secondPassword) throws Exception {

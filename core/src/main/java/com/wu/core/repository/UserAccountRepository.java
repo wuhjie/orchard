@@ -10,6 +10,4 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 public interface UserAccountRepository extends JpaSpecificationExecutor<CustomerAccount>, JpaRepository<CustomerAccount, Long>{
 
     CustomerAccount findByTel(String phone);
-
-
 }

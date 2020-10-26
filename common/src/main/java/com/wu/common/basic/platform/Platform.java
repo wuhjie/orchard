@@ -1,11 +1,9 @@
 package com.wu.common.basic.platform;
 
-import com.wu.common.domain.customer.CustomerInfo;
+import com.wu.common.domain.customer.Customer;
 import com.wu.common.domain.garden.Garden;
 import com.wu.common.domain.garden.Fruit;
 import com.wu.common.domain.garden.Tree;
-//import io.swagger.annotations.ApiModel;
-//import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +31,7 @@ public class Platform {
     public List<Fruit> fruits;
 
 //    @ApiModelProperty(value = "all customerInfos on platform", name = "customerInfos")
-    public List<CustomerInfo> customerInfos;
+    public List<Customer> customers;
 
     public String tel;
 

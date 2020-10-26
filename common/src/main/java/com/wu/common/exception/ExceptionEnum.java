@@ -12,7 +12,6 @@ public enum ExceptionEnum implements IException{
     /**
      *
      */
-//    RPC_EXCEPTION(-1, "远程服务器开小差了哦"),
     DEFAULT_EXCEPTION(-2, "something wrong with the internet"),
     PARAM_BINDING_EXCEPTION(-2, "please check the parameters"),
     BUSINESS_EXCEPTION(-3, "abnormal business"),

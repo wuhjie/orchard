@@ -1,6 +1,6 @@
 package com.wu.common.basic;
 
-import com.wu.common.domain.customer.CustomerInfo;
+import com.wu.common.domain.customer.Customer;
 import com.wu.common.domain.garden.Garden;
 import com.wu.common.domain.garden.Tree;
 import io.swagger.annotations.ApiModel;
@@ -35,7 +35,7 @@ public class Record extends Order{
     public Garden company;
 
     @ApiModelProperty(value = "order related customerInfo", name = "customerInfo")
-    public CustomerInfo customerInfo;
+    public Customer customerInfo;
 
     @ApiModelProperty(value = "order related tree", name = "orderedTree")
     public Tree orderedTree;

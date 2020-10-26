@@ -1,7 +1,7 @@
 package com.wu.common.domain.garden;
 
 import com.wu.common.basic.Order;
-import com.wu.common.domain.customer.CustomerInfo;
+import com.wu.common.domain.customer.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 @ApiModel(value = "platform for company")
 public class Garden {
 
@@ -34,7 +34,7 @@ public class Garden {
     List<Fruit> ownedFruits;
 
     @ApiModelProperty(value = "followers", name = "followers")
-    List<CustomerInfo> followers;
+    List<Customer> followers;
 
     @ApiModelProperty(value = "level based on transaction amount", name = "level")
     public Integer level;
@@ -54,16 +54,5 @@ public class Garden {
         public BigDecimal income;
 
         public BigDecimal insurance;
-    }
-
-
-    public Garden(List<Order> companyOrders, List<Tree> ownedTrees, List<Fruit> ownedFruits, List<CustomerInfo> followers, Integer level, Integer companyStatus, Integer companyLevel) {
-        this.companyOrders = companyOrders;
-        this.ownedTrees = ownedTrees;
-        this.ownedFruits = ownedFruits;
-        this.followers = followers;
-        this.level = level;
-        this.companyStatus = companyStatus;
-        this.companyLevel = companyLevel;
     }
 }

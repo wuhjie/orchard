@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * @ClassName ApiResponse
  * @Description
- * @Author nullacc
+ * @Author wuhjie
  * @Data 2020/10/15 11:37 am
  * @Version 1.0
  **/

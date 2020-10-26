@@ -2,7 +2,9 @@ package com.wu.common.domain.customer;
 
 import com.wu.common.domain.garden.Fruit;
 import com.wu.common.domain.garden.Tree;
+import io.swagger.annotations.ApiModel;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,12 +12,12 @@ import java.util.List;
  */
 public class ShoppingCart {
 
-    public List<Tree> treesInShoppingCart;
+    public String customerId;
 
-    public List<Fruit> fruitInShoppingCart;
+    public String goodId;
 
-    public Integer pieces;
+    public String goodName;
 
-
+    public Date createdTime;
 
 }

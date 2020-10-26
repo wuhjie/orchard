@@ -1,2 +1,21 @@
 server:
-  port: 8090
+  port: 8080
+
+
+spring:
+  application:
+    name: wu-web
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/Orchard?useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: password
+
+
+mybatis:
+  type-aliases-package: com.wu.web.dao
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:/resources/mybatis/mapper/*.xml
+
+
+
