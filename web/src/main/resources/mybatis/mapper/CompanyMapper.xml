@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wu.web.dao.CompanyDao">
+
+    <insert id="addCustomer" parameterType="com.wu.common.domain.company.Company">
+        insert into Company (companyId, companyName, companyLocation, companyStatus, verificationStatus, createdTime)
+        values (#{companyId},#{companyName}, #{companyLocation}, #{companyStatus}, #{verificationStatus}, #{createdTime});
+    </insert>
+
+    <select id="queryById" resultType="com.wu.common.domain.company.Company" parameterType="String">
+        select * from Company where companyId = #{customerId}
+    </select>
+
+    <select id="queryAll" resultType="com.wu.common.domain.company.Company">
+        select * from Company;
+    </select>
+
+</mapper>

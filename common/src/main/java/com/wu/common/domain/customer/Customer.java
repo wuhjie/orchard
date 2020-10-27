@@ -27,7 +27,6 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value = "customerInfo")
 @Accessors(chain = true)
 
 
@@ -52,6 +51,5 @@ public class Customer implements Serializable {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
-
 
 }

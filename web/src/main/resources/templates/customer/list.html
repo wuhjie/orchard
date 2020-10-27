@@ -60,8 +60,12 @@
 								<tr>
 									<th>customerId</th>
 									<th>nickname</th>
+									<th>tel</th>
+									<th>location</th>
+									<th>status</th>
 									<th>gender</th>
 									<th>birthDay</th>
+									<th>createdTime</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -70,6 +74,7 @@
 									<td th:text="${customer.getNickname()}"></td>
 									<td th:text="${customer.getTel()}"></td>
 									<td th:text="${customer.getLocation()}"></td>
+									<td th:text="${customer.getStatus()}}"></td>
 									<td th:text="${customer.getGender()==0?'female':'male'}"></td>
 									<td th:text="${#dates.format(customer.getBirthday(), 'yy-MM-dd ')}"></td>
 									<td th:text="${#dates.format(customer.getCreatedTime(), 'yy-MM-dd ')}"></td>

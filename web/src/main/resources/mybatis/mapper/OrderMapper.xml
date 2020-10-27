@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wu.web.dao.OrderDao">
+
+    <insert id="addOrder" parameterType="com.wu.common.domain.Order">
+        insert into subOrder (customerId, goodId, goodPrice, shippingPrice, createdTime, finishedTime, orderStatus, shippingAddress, goodName, companyId, companyName)
+        values (#{customerId}, #{goodId}, #{goodPrice}, #{shippingPrice}, #{createdTime}, #{finishedTime}, #{orderStatus}, #{shippingAddress}, #{goodName}, #{companyId}, #{companyName})
+    </insert>
+
+    <select id="queryById" parameterType="com.wu.common.domain.Order">
+        select * from subOrder where orderId = #{orderId}
+    </select>
+
+    <select id="queryAll" parameterType="com.wu.common.domain.Order">
+        select * from subOrder;
+    </select>
+
+</mapper>

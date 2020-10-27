@@ -3,11 +3,8 @@ package com.wu.web.controller;
 import com.wu.common.domain.customer.Customer;
 import com.wu.web.service.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -21,32 +18,21 @@ import java.util.List;
 @RestController
 public class CustomerController {
 
+
+    CustomerService customerService;
+
     @Autowired
-    private CustomerService customerService;
+    public void setCustomerService (CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
-
-//    public void setCustomerService(CustomerService customerService) {
-//        this.customerService = customerService;
-//    }
-
-//    @GetMapping("/hello")
-//    public void helloWorld() {
-//        System.out.println("7777");
-//    }
-
-//    @RequestMapping("/customer")
-//    public String list(Model model) {
-//        Collection<Customer> customers = customerService.queryAll();
-//        model.addAttribute("customers", customers);
-//        return "customers/list";
-//    }
 
     @RequestMapping("/customer/add")
     public boolean addCustomer(Customer customer) {
         return customerService.addCustomer(customer);
     }
 
-    @GetMapping("customer/queryById/{id}")
+    @GetMapping("customer/queryById/{customerId}")
     public Customer queryById(@PathVariable("customerId") String customerId) {
         Customer customer = customerService.queryById(customerId);
         if (customer == null) {

@@ -18,7 +18,6 @@ import java.util.*;
 @Repository
 public interface CustomerDao {
 
-
     boolean addCustomer(Customer customer);
 
     Customer queryById(String customerId);
