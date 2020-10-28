@@ -4,10 +4,8 @@ import com.wu.common.domain.company.Company;
 import com.wu.web.service.interfaces.CompanyService;
 import com.wu.web.service.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +17,7 @@ import java.util.List;
  * @Version 1.0
  **/
 
-@RestController
+@Controller
 public class CompanyController {
 
     CompanyService companyService;
@@ -44,8 +42,8 @@ public class CompanyController {
         return company;
     }
 
-    @GetMapping("/company")
-    public List<Company> queryAll() {
-        return companyService.queryAll();
+    @RequestMapping("/company")
+    public String queryAll() {
+        return "redirect:/list.html";
     }
 }

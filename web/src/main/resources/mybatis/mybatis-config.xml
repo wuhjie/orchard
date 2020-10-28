@@ -6,7 +6,4 @@
     <settings>
         <setting name="cacheEnabled" value="true"/>
     </settings>
-<!--    <mappers>-->
-<!--        <mapper resource="CustomerMapper.xml"></mapper>-->
-<!--    </mappers>-->
 </configuration>

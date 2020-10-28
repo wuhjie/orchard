@@ -1,6 +1,6 @@
 package com.wu.web.dao;
 
-import com.wu.common.domain.Order;
+import com.wu.common.domain.MainOrder;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -17,11 +17,32 @@ import java.util.List;
 @Mapper
 @Repository
 public interface OrderDao {
+    /**
+     *
+     * @param mainOrder
+     * @return
+     */
+    boolean addOrder(MainOrder mainOrder);
 
-    public boolean addOrder(Order order);
+    /**
+     *
+     * @param orderId
+     * @return
+     */
+    MainOrder queryByOrderId(String orderId);
 
-    public Order queryByOrderId(String orderId);
+    /**
+     *
+     * @param customerId
+     * @return
+     */
+    List<MainOrder> quertByCustomerId(String customerId);
 
-    public List<Order> quertByCustomerId(String customerId);
+    /**
+     *
+     * @param mainOrder
+     * @return
+     */
+    MainOrder orderStatusChanged(MainOrder mainOrder);
 
 }

@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @ClassName Order
+ * @ClassName MainOrder
  * @Description
  * @Author wuhjie
  * @Data 2020/10/26 4:30 pm
  * @Version 1.0
  **/
-public class Order {
+public class MainOrder {
 
     String customerId;
 

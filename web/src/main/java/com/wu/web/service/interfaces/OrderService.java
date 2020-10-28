@@ -1,6 +1,6 @@
 package com.wu.web.service.interfaces;
 
-import com.wu.common.domain.Order;
+import com.wu.common.domain.MainOrder;
 
 import java.util.List;
 
@@ -13,11 +13,11 @@ import java.util.List;
  **/
 public interface OrderService {
 
-    boolean addOrder(Order order);
+    boolean addOrder(MainOrder mainOrder);
 
-    Order queryById(String orderId);
+    MainOrder queryById(String orderId);
 
-    List<Order> queryOrder();
+    List<MainOrder> queryOrder();
 
 
 }

@@ -1,5 +1,6 @@
 package com.wu.web.service.impl;
 
+import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.customer.Customer;
 import com.wu.web.dao.CustomerDao;
 import com.wu.web.service.interfaces.CustomerService;
@@ -44,5 +45,16 @@ public class CustomerImpl implements CustomerService {
     public List<Customer> queryAll() {
         setCustomerDao(customerDao);
         return customerDao.queryAll();
+    }
+
+    /**
+     *
+     * @param mainOrder
+     * @return the subOrder inside the mainOrder
+     */
+    @Override
+    public MainOrder puchase(MainOrder mainOrder) {
+        setCustomerDao(customerDao);
+        return customerDao.purchase(mainOrder);
     }
 }

@@ -23,6 +23,8 @@ public class MyMvcConfigure implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/index.html").setViewName("index");
         registry.addViewController("/main.html").setViewName("dashboard");
+        registry.addViewController("/list.html").setViewName("customerList");
+
     }
 
     @Bean
@@ -30,11 +32,11 @@ public class MyMvcConfigure implements WebMvcConfigurer {
         return new MyLocaleResolver();
     }
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new LoginHandlerInterceptor())
-//                .addPathPatterns("/**").excludePathPatterns("/index.html", "/", "/user/login");
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginHandlerInterceptor())
+                .addPathPatterns("/**").excludePathPatterns("/index.html", "/", "/user/login");
+    }
 
 
 }

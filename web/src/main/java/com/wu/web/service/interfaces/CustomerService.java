@@ -1,5 +1,6 @@
 package com.wu.web.service.interfaces;
 
+import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.customer.Customer;
 
 import java.util.List;
@@ -18,6 +19,8 @@ public interface CustomerService {
     Customer queryById (String CustomerId);
 
     List<Customer> queryAll();
+
+    MainOrder puchase (MainOrder mainOrder);
 
 
 }

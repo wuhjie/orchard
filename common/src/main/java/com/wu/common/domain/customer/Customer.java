@@ -1,7 +1,7 @@
 package com.wu.common.domain.customer;
 
 //import com.wu.common.domain.garden.Garden;
-//import com.wu.common.basic.Order;
+//import com.wu.common.basic.MainOrder;
 //import com.wu.common.domain.garden.Tree;
 //import com.wu.common.basic.platform.Wallet;
 import io.swagger.annotations.ApiModel;
@@ -13,8 +13,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -28,28 +27,38 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-
-
-@Table(name = "Customer")
+@Entity
 
 public class Customer implements Serializable {
 
+    @Id
+    @GeneratedValue
     private String customerId;
 
+    @Column(nullable = false, unique = true)
     private String nickname;
 
+    @Column(nullable = false)
     private Integer grade;
 
+    @Column
     private String tel;
 
+    @Column
     private String location;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column
+    private Integer status;
+
+    @Column
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date createdTime;
 
+    @Column(nullable = false)
     private Integer gender;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date birthday;
 
 }

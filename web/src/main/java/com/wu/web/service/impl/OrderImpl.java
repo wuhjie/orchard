@@ -1,6 +1,6 @@
 package com.wu.web.service.impl;
 
-import com.wu.common.domain.Order;
+import com.wu.common.domain.MainOrder;
 import com.wu.web.service.interfaces.OrderService;
 
 import java.util.List;
@@ -17,17 +17,17 @@ public class OrderImpl implements OrderService {
 
 
     @Override
-    public boolean addOrder(Order order) {
+    public boolean addOrder(MainOrder mainOrder) {
         return false;
     }
 
     @Override
-    public Order queryById(String orderId) {
+    public MainOrder queryById(String orderId) {
         return null;
     }
 
     @Override
-    public List<Order> queryOrder() {
+    public List<MainOrder> queryOrder() {
         return null;
     }
 }
