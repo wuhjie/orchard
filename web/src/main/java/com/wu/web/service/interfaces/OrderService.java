@@ -1,6 +1,8 @@
 package com.wu.web.service.interfaces;
 
 import com.wu.common.domain.MainOrder;
+import com.wu.common.domain.customer.Customer;
+import com.wu.web.dao.MainOrderDao;
 
 import java.util.List;
 
@@ -15,9 +17,11 @@ public interface OrderService {
 
     boolean addOrder(MainOrder mainOrder);
 
-    MainOrder queryById(String orderId);
+    MainOrder queryByOrderId(String orderId);
 
-    List<MainOrder> queryOrder();
+    List<MainOrder> queryByCustomerId(Customer customer);
 
+    MainOrder makingOrder(MainOrder mainOrder);
 
+    MainOrder orderFinished(MainOrder mainOrder);
 }

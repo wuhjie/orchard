@@ -47,14 +47,22 @@ public class CustomerImpl implements CustomerService {
         return customerDao.queryAll();
     }
 
-    /**
-     *
-     * @param mainOrder
-     * @return the subOrder inside the mainOrder
-     */
-    @Override
-    public MainOrder puchase(MainOrder mainOrder) {
-        setCustomerDao(customerDao);
-        return customerDao.purchase(mainOrder);
-    }
+//    /**
+//     *
+//     * @param mainOrder
+//     * @return the subOrder inside the mainOrder
+//     */
+//    @Override
+//    public MainOrder puchase(MainOrder mainOrder) {
+//        setCustomerDao(customerDao);
+//        return customerDao.purchase(mainOrder);
+//    }
+//
+//    @Override
+//    public MainOrder orderFinished(MainOrder mainOrder) {
+//        setCustomerDao(customerDao);
+//        return customerDao.orderFinished(mainOrder);
+//    }
+
+
 }

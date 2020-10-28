@@ -39,12 +39,18 @@ public interface CustomerDao {
      */
     List<Customer> queryAll();
 
-    /**
-     *
-     * @param mainOrder
-     * @return
-     */
-    MainOrder purchase(MainOrder mainOrder);
-
-
+//    /**
+//     *
+//     * @param mainOrder
+//     * @return
+//     */
+//    MainOrder purchase(MainOrder mainOrder);
+//
+//
+//    /**
+//     *
+//     * @param mainOrder
+//     * @return
+//     */
+//    MainOrder orderFinished(MainOrder mainOrder);
 }

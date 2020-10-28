@@ -16,9 +16,11 @@
         select * from Customer;
     </select>
 
-    <update id="purchase" parameterType="com.wu.common.domain.MainOrder">
-        update subOrder set orderstatus = '1' where (select * from subOrder where customerId = #{customerId}
-                                where goodId = #{goodId} as tempOrder);
-    </update>
-    
+<!--    <update id="purchase" parameterType="com.wu.common.domain.MainOrder">-->
+<!--        update subOrder set orderstatus = '1' where (select * from subOrder where customerId = #{customerId}-->
+<!--                                where goodId = #{goodId} as tempOrder);-->
+<!--    </update>-->
+
+
+
 </mapper>

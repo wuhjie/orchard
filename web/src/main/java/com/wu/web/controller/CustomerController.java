@@ -21,14 +21,6 @@ import java.util.List;
 @RestController
 public class CustomerController {
 
-
-//    CustomerService customerService;
-//
-//    @Autowired
-//    public void setCustomerService (CustomerService customerService) {
-//        this.customerService = customerService;
-//    }
-
     CustomerDao customerDao;
 
     @Autowired
@@ -36,14 +28,10 @@ public class CustomerController {
         this.customerDao = customerDao;
     }
 
-
-//    @RequestMapping("/customer/add")
-//    public boolean addCustomer(Customer customer) {
-//        return customerDao.addCustomer(customer);
-//    }
-
-    public String add(Model model){
-        Collection<>
+    @RequestMapping("/customer/add")
+    public String addCustomer(Customer customer){
+        customerDao.addCustomer(customer);
+        return "redirect:/customer";
     }
 
     @GetMapping("customer/queryById/{customerId}")

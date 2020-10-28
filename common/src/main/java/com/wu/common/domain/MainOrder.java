@@ -57,7 +57,8 @@ public class MainOrder {
         itemSentOut(3, "the order is sending to the express"),
         orderShipping(4, "the good is delivering"),
         orderShipped(5, "the good has been delivered"),
-        orderFinished(6, "the order is finished");
+        orderFinished(6, "the order is finished, historic order"),
+        orderCancelled(7, "this order is cancelled");
 
         OrderStatus(int code, String msg) {
         }

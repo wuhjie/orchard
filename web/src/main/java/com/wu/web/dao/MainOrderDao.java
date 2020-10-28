@@ -16,7 +16,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface OrderDao {
+public interface MainOrderDao {
     /**
      *
      * @param mainOrder
@@ -39,10 +39,16 @@ public interface OrderDao {
     List<MainOrder> quertByCustomerId(String customerId);
 
     /**
-     *
+     *status change when order statart
      * @param mainOrder
      * @return
      */
-    MainOrder orderStatusChanged(MainOrder mainOrder);
+    MainOrder makingOrder(MainOrder mainOrder);
 
+    /**
+     * status change when order finished
+     * @param mainOrder
+     * @return
+     */
+    MainOrder orderFinished(MainOrder mainOrder);
 }
