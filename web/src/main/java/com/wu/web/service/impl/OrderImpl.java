@@ -26,7 +26,7 @@ public class OrderImpl implements OrderService {
     }
 
     @Override
-    public boolean addOrder(MainOrder mainOrder) {
+    public MainOrder addOrder(MainOrder mainOrder) {
         setMainOrderDao(mainOrderDao);
         return mainOrderDao.addOrder(mainOrder);
     }
@@ -44,9 +44,9 @@ public class OrderImpl implements OrderService {
     }
 
     @Override
-    public MainOrder makingOrder(MainOrder mainOrder) {
+    public List<MainOrder> purchase(List<MainOrder> orders) {
         setMainOrderDao(mainOrderDao);
-        return mainOrderDao.makingOrder(mainOrder);
+        return mainOrderDao.purchase(orders);
     }
 
     @Override

@@ -19,12 +19,12 @@
     //todo
     <update id="purchase" parameterType="com.wu.common.domain.MainOrder">
         update subOrder set orderStatus = '1' where (select * from subOrder where customerId = #{customerId}
-            where goodId = #{goodId} as tempOrder);
+            where goodId = #{goodId});
     </update>
 
     <update id="orderFinished" parameterType="com.wu.common.domain.MainOrder">
         update subOrder set orderStatus = '6' where (select * from subOrder where customerId = #{customerId}
-            where orderId = #{orderId} as tempOrder);
+            where orderId = #{orderId});
     </update>
 
 </mapper>

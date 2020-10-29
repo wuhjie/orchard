@@ -19,38 +19,14 @@ import java.util.*;
 @Repository
 public interface CustomerDao {
 
-    /**
-     *
-     * @param customer
-     * @return
-     */
     boolean addCustomer(Customer customer);
 
-    /**
-     *
-     * @param customerId
-     * @return
-     */
     Customer queryById(String customerId);
 
-    /**
-     *
-     * @return
-     */
     List<Customer> queryAll();
 
-//    /**
-//     *
-//     * @param mainOrder
-//     * @return
-//     */
-//    MainOrder purchase(MainOrder mainOrder);
-//
-//
-//    /**
-//     *
-//     * @param mainOrder
-//     * @return
-//     */
-//    MainOrder orderFinished(MainOrder mainOrder);
+
+    List<MainOrder> purchase(List<MainOrder> orders);
+
+    MainOrder orderFinished(MainOrder mainOrder);
 }

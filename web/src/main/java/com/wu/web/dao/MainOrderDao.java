@@ -17,38 +17,14 @@ import java.util.List;
 @Mapper
 @Repository
 public interface MainOrderDao {
-    /**
-     *
-     * @param mainOrder
-     * @return
-     */
-    boolean addOrder(MainOrder mainOrder);
 
-    /**
-     *
-     * @param orderId
-     * @return
-     */
+    MainOrder addOrder(MainOrder mainOrder);
+
     MainOrder queryByOrderId(String orderId);
 
-    /**
-     *
-     * @param customerId
-     * @return
-     */
     List<MainOrder> quertByCustomerId(String customerId);
 
-    /**
-     *status change when order statart
-     * @param mainOrder
-     * @return
-     */
-    MainOrder makingOrder(MainOrder mainOrder);
+    List<MainOrder> purchase(List<MainOrder> mainOrder);
 
-    /**
-     * status change when order finished
-     * @param mainOrder
-     * @return
-     */
     MainOrder orderFinished(MainOrder mainOrder);
 }

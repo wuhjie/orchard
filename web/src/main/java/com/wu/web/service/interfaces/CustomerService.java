@@ -14,24 +14,14 @@ import java.util.List;
  **/
 public interface CustomerService {
 
-    /**
-     *
-     * @param customer
-     * @return
-     */
     boolean addCustomer (Customer customer);
 
-    /**
-     *
-     * @param CustomerId
-     * @return
-     */
     Customer queryById (String CustomerId);
 
-    /**
-     *
-     * @return
-     */
     List<Customer> queryAll();
+
+    List<MainOrder> purchase(List<MainOrder> orders);
+
+    MainOrder orderFinished(MainOrder mainOrder);
 
 }

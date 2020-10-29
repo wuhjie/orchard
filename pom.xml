@@ -26,7 +26,6 @@
 
     <modules>
         <module>web</module>
-        <module>customer</module>
         <module>common</module>
     </modules>
 

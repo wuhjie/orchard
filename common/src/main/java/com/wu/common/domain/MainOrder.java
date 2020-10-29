@@ -20,6 +20,8 @@ public class MainOrder {
 
     Integer mainOrderStatus;
 
+    Integer amount;
+
     private static class subOrder {
 
         String customerId;
@@ -43,6 +45,10 @@ public class MainOrder {
         String companyId;
 
         String companyName;
+
+        Integer amount;
+
+        String expressId;
 
     }
 

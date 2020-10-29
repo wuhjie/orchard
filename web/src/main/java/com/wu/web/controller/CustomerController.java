@@ -1,14 +1,15 @@
 package com.wu.web.controller;
 
+import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.customer.Customer;
 import com.wu.web.dao.CustomerDao;
+import com.wu.web.dao.MainOrderDao;
 import com.wu.web.service.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * @ClassName CustomerController
@@ -22,10 +23,16 @@ import java.util.List;
 public class CustomerController {
 
     CustomerDao customerDao;
+    MainOrderDao mainOrderDao;
 
     @Autowired
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
+    }
+
+    @Autowired
+    public void setMainOrderDao(MainOrderDao mainOrderDao) {
+        this.mainOrderDao = mainOrderDao;
     }
 
     @RequestMapping("/customer/add")
@@ -49,4 +56,20 @@ public class CustomerController {
         model.addAttribute("customer", customerCollection);
         return "customer/list";
     }
+
+    @GetMapping("/customer/order")
+    public String purchase(Model model, List<MainOrder> orders) {
+        Collection<MainOrder> mainOrderCollection = mainOrderDao.purchase(orders);
+        model.addAttribute("ordersMade", mainOrderCollection);
+        return "customer/order";
+    }
+
+    @GetMapping("customer/order")
+    public String orderFinished(Model model, MainOrder mainOrder) {
+        MainOrder newOrder = mainOrderDao.orderFinished(mainOrder);
+        model.addAttribute("orderFinished", newOrder);
+        return  "redirect:/customer";
+    }
+
+
 }

@@ -15,13 +15,13 @@ import java.util.List;
  **/
 public interface OrderService {
 
-    boolean addOrder(MainOrder mainOrder);
+    MainOrder addOrder(MainOrder mainOrder);
 
     MainOrder queryByOrderId(String orderId);
 
     List<MainOrder> queryByCustomerId(Customer customer);
 
-    MainOrder makingOrder(MainOrder mainOrder);
+    List<MainOrder> purchase(List<MainOrder> orders);
 
     MainOrder orderFinished(MainOrder mainOrder);
 }

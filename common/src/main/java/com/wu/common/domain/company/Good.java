@@ -31,4 +31,6 @@ public class Good {
     public BigDecimal price;
 
     public String companyId;
+
+    public Integer amount;
 }

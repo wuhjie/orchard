@@ -4,6 +4,7 @@ import com.wu.common.domain.MainOrder;
 import com.wu.web.dao.MainOrderDao;
 import org.jboss.jandex.Main;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,22 +37,22 @@ public class MainOrderController {
     }
 
     @GetMapping("mainOrder/queryById/{orderId}")
-    public String queryByOrderId(@PathVariable("orderId") String orderId) {
+    public String queryByOrderId(@PathVariable("orderId")Model model, String orderId) {
         MainOrder mainOrder = mainOrderDao.queryByOrderId(orderId);
         if (mainOrder == null) {
             return "404";
         }
-        //todo
-        return "mainOrder/update";
-    }
-
-    @GetMapping("mainOrder/queryByCustomerId/{customerId}")
-    public String queryByCustomerId(@PathVariable("customerId") String customerId) {
-        Collection<MainOrder> mainOrderCollection = mainOrderDao.quertByCustomerId(customerId);
+        model.addAttribute("orderWithCustomerId", mainOrder);
         //todo
         return "mainOrder/list";
     }
 
-
+    @GetMapping("mainOrder/queryByCustomerId/{customerId}")
+    public String queryByCustomerId(@PathVariable("customerId") Model model, String customerId) {
+        Collection<MainOrder> mainOrderCollection = mainOrderDao.quertByCustomerId(customerId);
+        //todo
+        model.addAttribute("orderWithCustomerId", mainOrderCollection);
+        return "mainOrder/list";
+    }
 
 }
