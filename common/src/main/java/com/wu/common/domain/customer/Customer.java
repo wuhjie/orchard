@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.UUID;
 
 
 /**
@@ -33,7 +33,7 @@ public class Customer implements Serializable {
 
     @Id
     @GeneratedValue
-    private String customerId;
+    private UUID customerId;
 
     @Column(nullable = false, unique = true)
     private String nickname;

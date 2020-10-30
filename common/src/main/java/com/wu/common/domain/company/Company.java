@@ -6,7 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @ClassName Company
@@ -23,13 +27,20 @@ import java.util.Date;
 @Accessors(chain = true)
 public class Company {
 
-    String companyId;
+    @Id
+    @GeneratedValue
+    UUID companyId;
 
+    @Column
     String companyLocation;
 
+    @Column
     Integer companyStatus;
 
+    @Column
     Integer verificationStatus;
 
+    @Column
     Date createdTime;
+
 }

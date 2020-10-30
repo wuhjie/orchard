@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @ClassName MainOrder
@@ -63,7 +64,7 @@ public class MainOrder implements Serializable {
     public static class subOrder implements Serializable {
 
         @Column(nullable = false, unique = true)
-        String customerId;
+        UUID customerId;
 
         @Column
         String goodId;
@@ -106,17 +107,17 @@ public class MainOrder implements Serializable {
 
         @Id
         @GeneratedValue
-        String subOrderId;
+        UUID subOrderId;
 
         public static enum OrderStatus {
 
             /**
              * status for order
              */
-            InShoppingCart(0, "still in the shopping cart"),
+            inShoppingCart(0, "still in the shopping cart"),
             orderPending(1, "order processed, pending"),
-            orderSuccess(2, "order has been sent to the company"),
-            itemSentOut(3, "the order is sending to the express"),
+            orderReceived(2, "order has been sent to the company"),
+            expressReceived(3, "the order is sending to the express"),
             orderShipping(4, "the good is delivering"),
             orderShipped(5, "the good has been delivered"),
             orderFinished(6, "the order is finished, historic order"),

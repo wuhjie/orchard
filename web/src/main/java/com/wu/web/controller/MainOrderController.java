@@ -57,6 +57,23 @@ public class MainOrderController {
         return "mainOrder/list";
     }
 
+//    //todo
+//    public String statusChanged(@PathVariable("orderId") Model model, String orderId, MainOrder.subOrder.OrderStatus changedStatus) {
+//        MainOrder newOrder = mainOrderDao.statusChanged(orderId, changedStatus);
+//        model.addAttribute("orderStatusChanged", newOrder);
+//        return "redirect:/mainOrder/list";
+//    }
+
+    /**
+     * todo stay in current page or go to the shopping cart page
+     */
+//    @GetMapping("/shoppingCart")
+    public String inShoppingCart(Model model, Good good) {
+        MainOrder mainOrder = mainOrderDao.inShoppingCart(good);
+        model.addAttribute("addToShoppingCart", mainOrder);
+        return "shoppingCart";
+    }
+
     @GetMapping("mainOrder/purchasing")
     public String purchaseAndOrderIntoMainOrder(Model model, List<MainOrder> mainOrders) {
         //todo
@@ -66,34 +83,39 @@ public class MainOrderController {
         return "purchasing";
     }
 
-//    //todo
-//    public String statusChanged(@PathVariable("orderId") Model model, String orderId, MainOrder.subOrder.OrderStatus changedStatus) {
-//        MainOrder newOrder = mainOrderDao.statusChanged(orderId, changedStatus);
-//        model.addAttribute("orderStatusChanged", newOrder);
-//        return "redirect:/mainOrder/list";
-//    }
+    //todo
+    public String orderPending(Model model, MainOrder subOrder) {
+        MainOrder newOrder = mainOrderDao.orderPending(subOrder.getMainOrderId());
+        return "redirect:/orders";
+    }
 
-    public String orderReceived(@PathVariable("orderId") Model model, MainOrder mainOrder) {
-        MainOrder newOrder = mainOrderDao.orderReceived(mainOrder.getMainOrderId());
+    public String orderReceived(Model model, MainOrder subOrder) {
+        MainOrder newOrder = mainOrderDao.orderReceived(subOrder.getMainOrderId());
         model.addAttribute("orderReceived", newOrder);
         return "redirect:/mainOrder/list";
     }
 
-    public String orderFinished(@PathVariable("orderId") Model model, MainOrder mainorder) {
-        MainOrder newOrder = mainOrderDao.orderFinished(mainorder.getMainOrderId());
+    public String expressReceived(Model model, MainOrder subOrder) {
+        MainOrder newOrder = mainOrderDao.expressReceived(subOrder.getMainOrderId());
+        model.addAttribute("expressedReceived", newOrder);
+        return "redirect:/list";
+    }
+
+    public String orderFinished(Model model, MainOrder subOrder) {
+        MainOrder newOrder = mainOrderDao.orderFinished(subOrder.getMainOrderId());
         model.addAttribute("orderFinished", newOrder);
-
+        return "redirect:/mainOrder";
     }
 
-    /**
-     * todo stay in current page or go to the shopping cart page
-     */
-    @GetMapping("/shoppingCart")
-    public String addToShoppingCart(Model model, Good good) {
-        MainOrder mainOrder = mainOrderDao.addToShoppingCart(good);
-        model.addAttribute("addToShoppingCart", mainOrder);
-        return "shoppingCart";
+    public String orderCancelled(Model model, MainOrder subOrder) {
+        MainOrder newOrder = mainOrderDao.orderCancelled(subOrder.getMainOrderId());
+        model.addAttribute("orderCancelled", newOrder);
+        return "redirect:/cancelled";
     }
+
+
+
+
 
 
 

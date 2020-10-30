@@ -5,8 +5,8 @@
 
 <!--    addOrder-->
     <insert id="addOrder" parameterType="com.wu.common.domain.MainOrder">
-        insert into Orchard.subOrder (customerId, goodId, goodPrice, shippingPrice, createdTime, finishedTime, orderStatus, shippingAddress, goodName, companyId, companyName, deliveryAddress, amount, expressId)
-        values (#{customerId}, #{goodId}, #{goodPrice}, #{shippingPrice}, #{createdTime}, #{finishedTime}, #{orderStatus}, #{shippingAddress}, #{goodName}, #{companyId}, #{companyName}, #{deliveryAddress}, #{amount}, #{expressId})
+        insert into Orchard.subOrder (customerId, goodId, goodPrice, shippingPrice, createdTime, finishedTime, orderStatus, shippingAddress, goodName, companyId, companyName, deliveryAddress, amount, expressId, subOrderId)
+        values (#{customerId}, #{goodId}, #{goodPrice}, #{shippingPrice}, #{createdTime}, #{finishedTime}, #{orderStatus}, #{shippingAddress}, #{goodName}, #{companyId}, #{companyName}, #{deliveryAddress}, #{amount}, #{expressId}, #{subOrderId})
     </insert>
 
 <!--    queryBuOrderId-->
@@ -19,11 +19,15 @@
         select * from Orchard.subOrder where customerId = #{customerId};
     </select>
 
-<!--    purchase-->
+    <insert id = "inShoppingCart" parameterType="com.wu.common.domain.company.Good">
+        insert into Orchard.subOrder values (#{customerId}, #{goodId}, #{goodPrice}, #{shippingPrice}, #{createdTime}, #{finishedTime}, #{orderStatus}, #{shippingAddress}, #{goodName}, #{companyId}, #{companyName}, #{deliveryAddress}, #{amount}, #{expressId}, #{subOrderId})
+    </insert>
+
+    <!--    orderpending-->
     <update id="purchase" parameterType="com.wu.common.domain.MainOrder">
         update Orchard.subOrder set orderStatus=1 where goodId in
-            <foreach collection="orders" item="goodId" separator=",">
-            </foreach>
+        <foreach collection="orders" item="goodId" separator=",">
+        </foreach>
     </update>
 
     <insert id="subOrderIntoMainOrder" parameterType="com.wu.common.domain.MainOrder">
@@ -31,6 +35,38 @@
         <foreach collection="orders" item="goodId">
         </foreach>
     </insert>
+
+    <update id="orderReceived" parameterType="com.wu.common.domain.MainOrder">
+        update Orchard.subOrder set orderStatus=2 where subOrderId = #{subOrderId}
+    </update>
+
+    <update id="expressReceived" parameterType="com.wu.common.domain.MainOrder">
+        update Orchard.subOrder set orderStatus=3 where subOrderId = #{subOrderId}
+    </update>
+
+    <update id="orderShipping" parameterType="com.wu.common.domain.MainOrder">
+        update Orchard.subOrder set orderStatus=4 where subOrderId = #{subOrderId}
+    </update>
+
+    <update id="orderShipped" parameterType="com.wu.common.domain.MainOrder">
+        update Orchard.subOrder set orderStatus=5 where subOrderId = #{subOrderId}
+    </update>
+
+    <update id="orderFinished" parameterType="com.wu.common.domain.MainOrder">
+        update Orchard.subOrder set orderStatus=6 where subOrderId = #{subOrderId}
+    </update>
+
+    <update id="orderCancelled" parameterType="com.wu.common.domain.MainOrder">
+        update Orchard.subOrder set orderStatus=7 where subOrderId = #{subOrderId}
+    </update>
+
+    <delete id="removeFromShoppingCart">
+
+    </delete>
+
+
+
+
 
     <!--    orderReceived-->
     <update id="orderReceived" parameterType="com.wu.common.domain.MainOrder">

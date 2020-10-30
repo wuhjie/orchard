@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 
 
 /**
@@ -27,7 +28,7 @@ public class Good {
 
     @Id
     @GeneratedValue
-    public String goodId;
+    public UUID goodId;
 
     @Column
     public String goodName;

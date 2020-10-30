@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @ClassName OrderDao
@@ -29,9 +30,21 @@ public interface MainOrderDao {
 
     List<MainOrder> subOrderIntoMainOrder(List<MainOrder> mainOrder);
 
-    MainOrder orderFinished(String orderId);
+    MainOrder inShoppingCart(Good good);
 
-    MainOrder orderReceived(String orderId);
+    MainOrder orderPending(UUID subOrderId);
 
-    MainOrder addToShoppingCart(Good good);
+    MainOrder orderReceived(UUID subOrderId);
+
+    MainOrder expressReceived(UUID subOrderId);
+
+    MainOrder orderShipping(UUID subOrderId);
+
+    MainOrder orderShipped(UUID subOrderId);
+
+    MainOrder orderFinished(UUID subOrderId);
+
+    MainOrder orderCancelled(UUID subOrderId);
+
+    void removeFromShoppingCart(UUID subOrderId);
 }

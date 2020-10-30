@@ -7,6 +7,7 @@ import com.wu.web.dao.MainOrderDao;
 import com.wu.web.service.interfaces.OrderService;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ import java.util.List;
  * @Data 2020/10/26 4:42 pm
  * @Version 1.0
  **/
+
+@Service
 public class OrderImpl implements OrderService {
 
     private MainOrderDao mainOrderDao;
@@ -27,25 +30,25 @@ public class OrderImpl implements OrderService {
     }
 
     @Override
-    public MainOrder addOrder(MainOrder mainOrder) {
+    public MainOrder.subOrder addOrder(MainOrder mainOrder) {
         setMainOrderDao(mainOrderDao);
         return mainOrderDao.addOrder(mainOrder);
     }
 
     @Override
-    public MainOrder queryByOrderId(String orderId) {
+    public MainOrder.subOrder queryByOrderId(String orderId) {
         setMainOrderDao(mainOrderDao);
         return mainOrderDao.queryByOrderId(orderId);
     }
 
     @Override
-    public List<MainOrder> queryByCustomerId(Customer customer) {
+    public List<MainOrder.subOrder> queryByCustomerId(Customer customer) {
         setMainOrderDao(mainOrderDao);
         return mainOrderDao.quertAll(customer.getCustomerId());
     }
 
     @Override
-    public List<MainOrder> purchase(List<MainOrder> orders) {
+    public List<MainOrder.subOrder> purchase(List<MainOrder> orders) {
         setMainOrderDao(mainOrderDao);
         return mainOrderDao.purchase(orders);
     }
@@ -57,25 +60,55 @@ public class OrderImpl implements OrderService {
     }
 
     @Override
-    public MainOrder orderFinished(MainOrder mainOrder) {
+    public MainOrder inShoppingCart(Good good) {
         setMainOrderDao(mainOrderDao);
-        return mainOrderDao.orderFinished(mainOrder.getMainOrderId());
-    }
-
-//    @Override
-//    public MainOrder statusChanged(String orderId, MainOrder.subOrder.OrderStatus changedStatus) {
-//        setMainOrderDao(mainOrderDao);
-//        return mainOrderDao.statusChanged(orderId, changedStatus);
-//    }
-
-    @Override
-    public MainOrder orderReceived(String orderId) {
-        setMainOrderDao(mainOrderDao);
-        return mainOrderDao.orderReceived(orderId);
+        return mainOrderDao.inShoppingCart(good);
     }
 
     @Override
-    public MainOrder addToShoppingCart(Good good) {
-        return null;
+    public MainOrder orderPending(MainOrder subOrder) {
+        setMainOrderDao(mainOrderDao);
+        return mainOrderDao.orderPending(subOrder.getMainOrderId());
+    }
+
+    @Override
+    public MainOrder orderReceived(MainOrder subOrder) {
+        setMainOrderDao(mainOrderDao);
+        return mainOrderDao.orderReceived(subOrder.getMainOrderId());
+    }
+
+    @Override
+    public MainOrder expressReceived(MainOrder.subOrder subOrder) {
+        setMainOrderDao(mainOrderDao);
+        return mainOrderDao.expressReceived(subOrder.getMainOrderId());
+    }
+
+    @Override
+    public MainOrder orderShipping(MainOrder.subOrder subOrder) {
+        setMainOrderDao(mainOrderDao);
+        return mainOrderDao.orderShipping(subOrder.getMainOrderId());
+    }
+
+    @Override
+    public MainOrder orderShipped(MainOrder.subOrder subOrder) {
+        setMainOrderDao(mainOrderDao);
+        return mainOrderDao.orderShipped(subOrder.getMainOrderId());
+    }
+
+    @Override
+    public MainOrder orderFinished(MainOrder.subOrder subOrder) {
+        setMainOrderDao(mainOrderDao);
+        return mainOrderDao.orderFinished(subOrder.getMainOrderId());
+    }
+
+    @Override
+    public MainOrder orderCancelled(MainOrder.subOrder subOrder) {
+        setMainOrderDao(mainOrderDao);
+        return mainOrderDao.orderCancelled(subOrder.getMainOrderId());
+    }
+
+    @Override
+    public void removeFromShoppingCart(MainOrder.subOrder subOrder) {
+        mainOrderDao.removeFromShoppingCart(subOrder.getSubOrderId());
     }
 }

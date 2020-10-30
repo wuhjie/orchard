@@ -65,9 +65,8 @@ public class CustomerController {
     }
 
     @PostMapping("customer/order")
-    public String orderFinished(Model model, MainOrder mainOrder) {
-        String orderId = mainOrder.getMainOrderId();
-        MainOrder newOrder = mainOrderDao.orderFinished(orderId);
+    public String orderFinished(Model model, MainOrder subOrder) {
+        MainOrder newOrder = mainOrderDao.orderFinished(subOrder.getMainOrderId());
         model.addAttribute("orderFinished", newOrder);
         return  "redirect:/customer";
     }

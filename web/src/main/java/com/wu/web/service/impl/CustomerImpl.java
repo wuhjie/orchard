@@ -22,7 +22,6 @@ public class CustomerImpl implements CustomerService {
 
     private CustomerDao customerDao;
 
-
     @Autowired
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;

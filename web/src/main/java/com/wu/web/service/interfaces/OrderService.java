@@ -25,12 +25,25 @@ public interface OrderService {
     List<MainOrder> purchase(List<MainOrder> orders);
 
     List<MainOrder> subOrderIntoMainOrder(List<MainOrder> orders);
-
-    MainOrder orderFinished(MainOrder mainOrder);
-
 //    MainOrder statusChanged(String orderId, MainOrder.subOrder.OrderStatus changedStatus);
 
-    MainOrder orderReceived(String orderId);
+    MainOrder inShoppingCart(Good good);
 
-    MainOrder addToShoppingCart(Good good);
+    MainOrder.subOrder orderPending(MainOrder.subOrder subOrder);
+
+    MainOrder.subOrder orderReceived(MainOrder.subOrder subOrder);
+
+    MainOrder.subOrder expressReceived(MainOrder.subOrder subOrder);
+
+    MainOrder.subOrder orderShipping(MainOrder.subOrder subOrder);
+
+    MainOrder.subOrder orderShipped(MainOrder.subOrder subOrder);
+
+    MainOrder.subOrder orderFinished(MainOrder.subOrder subOrder);
+
+    MainOrder.subOrder orderCancelled(MainOrder.subOrder subOrder);
+
+    void removeFromShoppingCart(MainOrder.subOrder subOrder);
+
+
 }
