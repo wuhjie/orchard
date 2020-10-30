@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wu.web.dao.MainOrderDao">
+
+<!--    addOrder-->
+    <insert id="addOrder" parameterType="com.wu.common.domain.MainOrder">
+        insert into Orchard.subOrder (customerId, goodId, goodPrice, shippingPrice, createdTime, finishedTime, orderStatus, shippingAddress, goodName, companyId, companyName, deliveryAddress, amount, expressId)
+        values (#{customerId}, #{goodId}, #{goodPrice}, #{shippingPrice}, #{createdTime}, #{finishedTime}, #{orderStatus}, #{shippingAddress}, #{goodName}, #{companyId}, #{companyName}, #{deliveryAddress}, #{amount}, #{expressId})
+    </insert>
+
+<!--    queryBuOrderId-->
+    <select id="queryByOrderId" parameterType="com.wu.common.domain.MainOrder">
+        select * from Orchard.subOrder where goodId = #{orderId}
+    </select>
+
+<!--    queryBycustomerId-->
+    <select id="queryByCustomerId" parameterType="com.wu.common.domain.MainOrder">
+        select * from Orchard.subOrder where customerId = #{customerId};
+    </select>
+
+<!--    purchase-->
+    <update id="purchase" parameterType="com.wu.common.domain.MainOrder">
+        update Orchard.subOrder set orderStatus=1 where goodId in
+            <foreach collection="orders" item="goodId" separator=",">
+            </foreach>
+    </update>
+
+    <insert id="subOrderIntoMainOrder" parameterType="com.wu.common.domain.MainOrder">
+        insert into Orchard.MainOrder values (#{customerId}, #{mainOrderId}, #{mainOrderPrice}, #{mainOrderStatus}, #{amount})
+        <foreach collection="orders" item="goodId">
+        </foreach>
+    </insert>
+
+    <!--    orderReceived-->
+    <update id="orderReceived" parameterType="com.wu.common.domain.MainOrder">
+        update Orchard.subOrder set orderStatus=2 where goodId=#{orderId}
+    </update>
+
+<!--    orderFinished-->
+    <update id="orderFinished" parameterType="com.wu.common.domain.MainOrder">
+        update Orchard.subOrder set orderStatus=6 where goodId=#{orderId}
+    </update>
+
+<!--    -->
+
+</mapper>

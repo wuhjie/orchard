@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -22,15 +25,22 @@ import java.util.Date;
 @Accessors(chain = true)
 public class Good {
 
+    @Id
+    @GeneratedValue
     public String goodId;
 
+    @Column
     public String goodName;
 
+    @Column
     public Date createdTime;
 
+    @Column
     public BigDecimal price;
 
+    @Column
     public String companyId;
 
+    @Column
     public Integer amount;
 }

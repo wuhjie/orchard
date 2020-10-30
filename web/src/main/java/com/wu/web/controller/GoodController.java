@@ -1,7 +1,9 @@
 package com.wu.web.controller;
 
+import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Good;
 import com.wu.web.service.interfaces.GoodService;
+import com.wu.web.service.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,10 +24,16 @@ import java.util.List;
 public class GoodController {
 
     GoodService goodService;
+    OrderService orderService;
 
     @Autowired
     public void setGoodService (GoodService goodService) {
         this.goodService = goodService;
+    }
+
+    @Autowired
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @RequestMapping("/good/add")
@@ -46,4 +54,5 @@ public class GoodController {
     public List<Good> queryAll() {
         return goodService.queryAll();
     }
+
 }

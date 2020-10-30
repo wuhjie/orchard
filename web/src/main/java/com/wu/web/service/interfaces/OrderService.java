@@ -1,6 +1,7 @@
 package com.wu.web.service.interfaces;
 
 import com.wu.common.domain.MainOrder;
+import com.wu.common.domain.company.Good;
 import com.wu.common.domain.customer.Customer;
 import com.wu.web.dao.MainOrderDao;
 
@@ -23,5 +24,13 @@ public interface OrderService {
 
     List<MainOrder> purchase(List<MainOrder> orders);
 
+    List<MainOrder> subOrderIntoMainOrder(List<MainOrder> orders);
+
     MainOrder orderFinished(MainOrder mainOrder);
+
+//    MainOrder statusChanged(String orderId, MainOrder.subOrder.OrderStatus changedStatus);
+
+    MainOrder orderReceived(String orderId);
+
+    MainOrder addToShoppingCart(Good good);
 }

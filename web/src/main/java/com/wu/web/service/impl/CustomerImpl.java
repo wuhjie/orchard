@@ -47,17 +47,15 @@ public class CustomerImpl implements CustomerService {
         return customerDao.queryAll();
     }
 
-
-
-    @Override
-    public List<MainOrder> purchase(List<MainOrder> orders) {
-        setCustomerDao(customerDao);
-        return customerDao.purchase(orders);
-    }
-
-    @Override
-    public MainOrder orderFinished(MainOrder mainOrder) {
-        setCustomerDao(customerDao);
-        return customerDao.orderFinished(mainOrder);
-    }
+//    @Override
+//    public List<MainOrder> purchase(List<MainOrder> orders) {
+//        setCustomerDao(customerDao);
+//        return customerDao.purchase(orders);
+//    }
+//
+//    @Override
+//    public MainOrder orderFinished(MainOrder mainOrder) {
+//        setCustomerDao(customerDao);
+//        return customerDao.orderFinished(mainOrder);
+//    }
 }

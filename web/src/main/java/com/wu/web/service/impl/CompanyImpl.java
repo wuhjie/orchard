@@ -1,5 +1,6 @@
 package com.wu.web.service.impl;
 
+import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Company;
 import com.wu.web.dao.CompanyDao;
 import com.wu.web.service.interfaces.CompanyService;
@@ -43,4 +44,6 @@ public class CompanyImpl implements CompanyService {
         setCompanyDao(companyDao);
         return companyDao.queryAll();
     }
+
+
 }

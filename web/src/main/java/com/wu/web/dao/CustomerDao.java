@@ -25,8 +25,7 @@ public interface CustomerDao {
 
     List<Customer> queryAll();
 
+//    List<MainOrder> purchase(List<MainOrder> orders);
 
-    List<MainOrder> purchase(List<MainOrder> orders);
-
-    MainOrder orderFinished(MainOrder mainOrder);
+//    MainOrder orderFinished(MainOrder mainOrder);
 }

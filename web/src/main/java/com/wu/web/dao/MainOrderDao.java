@@ -1,6 +1,7 @@
 package com.wu.web.dao;
 
 import com.wu.common.domain.MainOrder;
+import com.wu.common.domain.company.Good;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -22,9 +23,15 @@ public interface MainOrderDao {
 
     MainOrder queryByOrderId(String orderId);
 
-    List<MainOrder> quertByCustomerId(String customerId);
+    List<MainOrder> quertAll(String customerId);
 
     List<MainOrder> purchase(List<MainOrder> mainOrder);
 
-    MainOrder orderFinished(MainOrder mainOrder);
+    List<MainOrder> subOrderIntoMainOrder(List<MainOrder> mainOrder);
+
+    MainOrder orderFinished(String orderId);
+
+    MainOrder orderReceived(String orderId);
+
+    MainOrder addToShoppingCart(Good good);
 }

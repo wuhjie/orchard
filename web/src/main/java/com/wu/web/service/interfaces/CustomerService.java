@@ -20,8 +20,8 @@ public interface CustomerService {
 
     List<Customer> queryAll();
 
-    List<MainOrder> purchase(List<MainOrder> orders);
-
-    MainOrder orderFinished(MainOrder mainOrder);
+//    List<MainOrder> purchase(List<MainOrder> orders);
+//
+//    MainOrder orderFinished(MainOrder mainOrder);
 
 }

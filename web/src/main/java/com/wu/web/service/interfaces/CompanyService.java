@@ -1,5 +1,6 @@
 package com.wu.web.service.interfaces;
 
+import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Company;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface CompanyService {
     Company queryById(String companyId);
 
     List<Company> queryAll();
+
 }

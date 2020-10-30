@@ -17,7 +17,7 @@ import java.util.List;
  * @Version 1.0
  **/
 
-@Controller
+@RestController
 public class CompanyController {
 
     CompanyService companyService;

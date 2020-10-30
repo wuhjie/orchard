@@ -1,6 +1,7 @@
 package com.wu.web.service.impl;
 
 import com.wu.common.domain.MainOrder;
+import com.wu.common.domain.company.Good;
 import com.wu.common.domain.customer.Customer;
 import com.wu.web.dao.MainOrderDao;
 import com.wu.web.service.interfaces.OrderService;
@@ -40,7 +41,7 @@ public class OrderImpl implements OrderService {
     @Override
     public List<MainOrder> queryByCustomerId(Customer customer) {
         setMainOrderDao(mainOrderDao);
-        return mainOrderDao.quertByCustomerId(customer.getCustomerId());
+        return mainOrderDao.quertAll(customer.getCustomerId());
     }
 
     @Override
@@ -50,8 +51,31 @@ public class OrderImpl implements OrderService {
     }
 
     @Override
+    public List<MainOrder> subOrderIntoMainOrder(List<MainOrder> orders) {
+        setMainOrderDao(mainOrderDao);
+        return mainOrderDao.purchase(orders);
+    }
+
+    @Override
     public MainOrder orderFinished(MainOrder mainOrder) {
         setMainOrderDao(mainOrderDao);
-        return mainOrderDao.orderFinished(mainOrder);
+        return mainOrderDao.orderFinished(mainOrder.getMainOrderId());
+    }
+
+//    @Override
+//    public MainOrder statusChanged(String orderId, MainOrder.subOrder.OrderStatus changedStatus) {
+//        setMainOrderDao(mainOrderDao);
+//        return mainOrderDao.statusChanged(orderId, changedStatus);
+//    }
+
+    @Override
+    public MainOrder orderReceived(String orderId) {
+        setMainOrderDao(mainOrderDao);
+        return mainOrderDao.orderReceived(orderId);
+    }
+
+    @Override
+    public MainOrder addToShoppingCart(Good good) {
+        return null;
     }
 }
