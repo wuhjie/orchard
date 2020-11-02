@@ -36,7 +36,7 @@ public class MainOrder implements Serializable {
 
     @Id
     @GeneratedValue
-    String mainOrderId;
+    UUID mainOrderId;
 
     @Column
     BigDecimal mainOrderPrice;
@@ -115,6 +115,7 @@ public class MainOrder implements Serializable {
              * status for order
              */
             inShoppingCart(0, "still in the shopping cart"),
+            itemSelected(8, "this item has been selected"),
             orderPending(1, "order processed, pending"),
             orderReceived(2, "order has been sent to the company"),
             expressReceived(3, "the order is sending to the express"),
@@ -125,7 +126,6 @@ public class MainOrder implements Serializable {
 
             OrderStatus(int code, String msg) {
             }
-
 
         }
 

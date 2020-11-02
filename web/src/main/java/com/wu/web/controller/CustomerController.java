@@ -3,8 +3,7 @@ package com.wu.web.controller;
 import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.customer.Customer;
 import com.wu.web.dao.CustomerDao;
-import com.wu.web.dao.MainOrderDao;
-import com.wu.web.service.interfaces.CustomerService;
+import com.wu.web.dao.OrderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,8 @@ import java.util.*;
 public class CustomerController {
 
     CustomerDao customerDao;
-    MainOrderDao mainOrderDao;
+    OrderDao orderDao;
+
 
     @Autowired
     public void setCustomerDao(CustomerDao customerDao) {
@@ -31,8 +31,8 @@ public class CustomerController {
     }
 
     @Autowired
-    public void setMainOrderDao(MainOrderDao mainOrderDao) {
-        this.mainOrderDao = mainOrderDao;
+    public void setMainOrderDao(OrderDao orderDao) {
+        this.orderDao = orderDao;
     }
 
     @RequestMapping("/customer/add")
@@ -57,16 +57,24 @@ public class CustomerController {
         return "customer/list";
     }
 
+    /**
+     * todo use purchase and subOrderIntoMainOrder
+     */
+
     @GetMapping("/customer/order")
-    public String purchase(Model model, List<MainOrder> orders) {
-        Collection<MainOrder> mainOrderCollection = mainOrderDao.purchase(orders);
-        model.addAttribute("ordersMade", mainOrderCollection);
+    public String purchase(Model model, List<MainOrder.subOrder> orders) {
+
+        List<MainOrder.subOrder> newOrderCollection = new ArrayList<>();
+        for (MainOrder.subOrder order : orders) {
+            newOrderCollection.add(orderDao.purchase(order));
+        }
+        model.addAttribute("ordersMade", newOrderCollection);
         return "customer/order";
     }
 
     @PostMapping("customer/order")
-    public String orderFinished(Model model, MainOrder subOrder) {
-        MainOrder newOrder = mainOrderDao.orderFinished(subOrder.getMainOrderId());
+    public String orderFinished(Model model, MainOrder.subOrder subOrder) {
+        MainOrder.subOrder newOrder = orderDao.orderFinished(subOrder.getSubOrderId());
         model.addAttribute("orderFinished", newOrder);
         return  "redirect:/customer";
     }

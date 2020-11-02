@@ -2,8 +2,7 @@ package com.wu.web.controller;
 
 import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Good;
-import com.wu.web.dao.MainOrderDao;
-import org.jboss.jandex.Main;
+import com.wu.web.dao.OrderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @ClassName MainOrderController
@@ -25,22 +25,22 @@ import java.util.List;
 @RestController
 public class MainOrderController {
 
-    MainOrderDao mainOrderDao;
+    OrderDao orderDao;
 
     @Autowired
-    public void setMainOrderDao(MainOrderDao mainOrderDao) {
-        this.mainOrderDao = mainOrderDao;
+    public void setMainOrderDao(OrderDao orderDao) {
+        this.orderDao = orderDao;
     }
 
     @RequestMapping("/mainOrder/add")
-    public String addOrder(MainOrder mainOrder) {
-        mainOrderDao.addOrder(mainOrder);
+    public String addOrder(MainOrder.subOrder mainOrder) {
+        orderDao.addOrder(mainOrder);
         return "redirect:/mainOrder";
     }
 
     @GetMapping("mainOrder/queryById/{orderId}")
-    public String queryByOrderId(@PathVariable("orderId")Model model, String orderId) {
-        MainOrder mainOrder = mainOrderDao.queryByOrderId(orderId);
+    public String queryByOrderId(@PathVariable("orderId")Model model, UUID orderId) {
+        MainOrder.subOrder mainOrder = orderDao.queryByOrderId(orderId);
         if (mainOrder == null) {
             return "404";
         }
@@ -50,73 +50,72 @@ public class MainOrderController {
     }
 
     @GetMapping("mainOrder/queryByCustomerId/{customerId}")
-    public String queryAll(@PathVariable("customerId") Model model, String customerId) {
-        Collection<MainOrder> mainOrderCollection = mainOrderDao.quertAll(customerId);
+    public String queryAll(@PathVariable("customerId") Model model, UUID customerId) {
+        List<MainOrder.subOrder> mainOrderCollection = orderDao.quertAll(customerId);
         //todo
         model.addAttribute("orderWithCustomerId", mainOrderCollection);
         return "mainOrder/list";
     }
 
-//    //todo
-//    public String statusChanged(@PathVariable("orderId") Model model, String orderId, MainOrder.subOrder.OrderStatus changedStatus) {
-//        MainOrder newOrder = mainOrderDao.statusChanged(orderId, changedStatus);
-//        model.addAttribute("orderStatusChanged", newOrder);
-//        return "redirect:/mainOrder/list";
-//    }
-
-    /**
-     * todo stay in current page or go to the shopping cart page
-     */
-//    @GetMapping("/shoppingCart")
+    @GetMapping("/shoppingCart")
     public String inShoppingCart(Model model, Good good) {
-        MainOrder mainOrder = mainOrderDao.inShoppingCart(good);
+        MainOrder.subOrder mainOrder = orderDao.inShoppingCart(good);
         model.addAttribute("addToShoppingCart", mainOrder);
         return "shoppingCart";
     }
 
+    @GetMapping("/removeFromShoppingCart")
+    public String removeFromShoppingCart(UUID subOrderId) {
+        orderDao.removeFromShoppingCart(subOrderId);
+        return "redirect:/shoppingCart";
+    }
+
+    public void itemSelected(Model model, List<MainOrder.subOrder> subOrders) {
+        List<MainOrder.subOrder> mainOrder = orderDao.itemSelected(subOrders);
+        model.addAttribute("itemSelected", mainOrder);
+    }
+
     @GetMapping("mainOrder/purchasing")
-    public String purchaseAndOrderIntoMainOrder(Model model, List<MainOrder> mainOrders) {
-        //todo
-        Collection<MainOrder> mainOrderCollection = mainOrderDao.purchase(mainOrders);
-        mainOrderDao.subOrderIntoMainOrder(mainOrders);
-        model.addAttribute("purchase", mainOrderCollection);
+    public String purchaseAndOrderIntoMainOrder(Model model, List<MainOrder.subOrder> subOrders) {
+        List<MainOrder.subOrder> newSubOrders = new ArrayList<>();
+        for (MainOrder.subOrder subOrder : subOrders) {
+            newSubOrders.add(orderDao.purchase(subOrder));
+        }
+        List<MainOrder> mainOrders = orderDao.subOrderIntoMainOrder(newSubOrders);
+
         return "purchasing";
     }
 
     //todo
-    public String orderPending(Model model, MainOrder subOrder) {
-        MainOrder newOrder = mainOrderDao.orderPending(subOrder.getMainOrderId());
+    public String orderPending(Model model, MainOrder.subOrder subOrder) {
+        MainOrder.subOrder newOrder = orderDao.orderPending(subOrder.getSubOrderId());
         return "redirect:/orders";
     }
 
     public String orderReceived(Model model, MainOrder subOrder) {
-        MainOrder newOrder = mainOrderDao.orderReceived(subOrder.getMainOrderId());
+        MainOrder.subOrder newOrder = orderDao.orderReceived(subOrder.getMainOrderId());
         model.addAttribute("orderReceived", newOrder);
         return "redirect:/mainOrder/list";
     }
 
     public String expressReceived(Model model, MainOrder subOrder) {
-        MainOrder newOrder = mainOrderDao.expressReceived(subOrder.getMainOrderId());
+        MainOrder.subOrder newOrder = orderDao.expressReceived(subOrder.getMainOrderId());
         model.addAttribute("expressedReceived", newOrder);
         return "redirect:/list";
     }
 
     public String orderFinished(Model model, MainOrder subOrder) {
-        MainOrder newOrder = mainOrderDao.orderFinished(subOrder.getMainOrderId());
+        MainOrder.subOrder newOrder = orderDao.orderFinished(subOrder.getMainOrderId());
         model.addAttribute("orderFinished", newOrder);
         return "redirect:/mainOrder";
     }
 
+    //todo
     public String orderCancelled(Model model, MainOrder subOrder) {
-        MainOrder newOrder = mainOrderDao.orderCancelled(subOrder.getMainOrderId());
+        MainOrder.subOrder newOrder = orderDao.orderCancelled(subOrder.getMainOrderId());
         model.addAttribute("orderCancelled", newOrder);
         return "redirect:/cancelled";
     }
-
-
-
-
-
 
 
 }

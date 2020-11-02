@@ -3,9 +3,9 @@ package com.wu.web.service.interfaces;
 import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Good;
 import com.wu.common.domain.customer.Customer;
-import com.wu.web.dao.MainOrderDao;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @ClassName OrderService
@@ -16,18 +16,18 @@ import java.util.List;
  **/
 public interface OrderService {
 
-    MainOrder addOrder(MainOrder mainOrder);
+//    MainOrder.subOrder addOrder(MainOrder mainOrder);
 
-    MainOrder queryByOrderId(String orderId);
+    MainOrder.subOrder queryByOrderId(UUID orderId);
 
-    List<MainOrder> queryByCustomerId(Customer customer);
+    List<MainOrder.subOrder> queryAll(Customer customer);
 
-    List<MainOrder> purchase(List<MainOrder> orders);
+    MainOrder.subOrder purchase(MainOrder.subOrder subOrder);
 
-    List<MainOrder> subOrderIntoMainOrder(List<MainOrder> orders);
+    MainOrder.subOrder subOrderIntoMainOrder(List<MainOrder.subOrder> orders);
 //    MainOrder statusChanged(String orderId, MainOrder.subOrder.OrderStatus changedStatus);
 
-    MainOrder inShoppingCart(Good good);
+    MainOrder.subOrder inShoppingCart(Good good);
 
     MainOrder.subOrder orderPending(MainOrder.subOrder subOrder);
 
