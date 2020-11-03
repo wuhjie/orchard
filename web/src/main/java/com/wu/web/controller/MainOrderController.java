@@ -70,6 +70,7 @@ public class MainOrderController {
         return "redirect:/shoppingCart";
     }
 
+    @GetMapping("/shoppingCart")
     public void itemSelected(Model model, List<MainOrder.subOrder> subOrders) {
         List<MainOrder.subOrder> mainOrder = orderDao.itemSelected(subOrders);
         model.addAttribute("itemSelected", mainOrder);
