@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -68,6 +70,7 @@ public class MainOrder implements Serializable {
     @AllArgsConstructor
     @Accessors(chain = true)
     @Entity
+    @EnableScheduling
     public static class subOrder implements Serializable {
 
         @Column(nullable = false, unique = true)

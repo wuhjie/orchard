@@ -5,6 +5,7 @@ import com.wu.common.domain.company.Company;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -21,9 +22,18 @@ public interface CompanyDao {
 
     boolean addCompany (Company company);
 
-    Company queryById(String companyId);
+    Company queryByCompanyId(String companyId, HttpServletRequest request);
 
-    List<Company> queryAll();
+    List<Company> queryAllCompany();
 
-//    MainOrder orderReceived(String orderId);
+//    Company updateCompanyInfo(Company company);
+
+    Company updateCompanyName(String companyId, String newCompanyName);
+
+    Company updateCompanyLocation(String companyId, String newLocation);
+
+    Company updateCompanyStatus(String companyId, Integer newStatus);
+
+    Company updateCompanyInfo(String companyId, String newCompanyInfo);
+
 }

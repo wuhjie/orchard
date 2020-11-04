@@ -1,13 +1,17 @@
 package com.wu.common.domain.company;
 
+import com.aliyun.oss.model.GenericResult;
+import com.aliyun.oss.model.MultipartUpload;
 import com.wu.common.utils.ImageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Blob;
 import java.util.Date;
 import java.util.UUID;
@@ -34,16 +38,19 @@ public class Company {
     String companyId;
 
     @Column
+    String companyName;
+
+    @Column
     String companyLocation;
 
     @Column
     Integer companyStatus;
 
     @Column
-    Integer verificationStatus;
-
-    @Column
     Date createdTime;
+
+    @Column(columnDefinition = "Text")
+    String companyInfo;
 
 
     @AllArgsConstructor
@@ -59,13 +66,21 @@ public class Company {
         String companyId;
 
         @Lob
-        Blob businessLicense;
+        Byte[] businessLicense;
 
         @Lob
-        Blob businessLicenseBack;
+        Byte[] businessLicenseBack;
 
-        @Column(columnDefinition = "Text")
-        String companyInfo;
+        @Column
+        Integer verificationStatus;
+
+        public enum verificaitonStatus {
+
+        }
+
+    }
+
+    public enum companyStatus {
 
     }
 

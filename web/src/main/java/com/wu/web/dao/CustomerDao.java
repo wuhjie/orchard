@@ -21,11 +21,12 @@ public interface CustomerDao {
 
     boolean addCustomer(Customer customer);
 
-    Customer queryById(String customerId);
+    Customer queryByCustomerId(String customerId);
 
-    List<Customer> queryAll();
+    Customer queryByCustomerName(String customerName);
 
-//    List<MainOrder> purchase(List<MainOrder> orders);
+    List<Customer> queryAllCustomer();
 
-//    MainOrder orderFinished(MainOrder mainOrder);
+    Customer updateCustomerInfo (Customer customer);
+
 }

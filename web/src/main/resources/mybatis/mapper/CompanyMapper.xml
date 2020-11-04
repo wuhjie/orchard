@@ -4,8 +4,14 @@
 <mapper namespace="com.wu.web.dao.CompanyDao">
 
     <insert id="addCustomer" parameterType="com.wu.common.domain.company.Company">
-        insert into Orchard.Company (companyId, companyName, companyLocation, companyStatus, verificationStatus, createdTime)
-        values (#{companyId},#{companyName}, #{companyLocation}, #{companyStatus}, #{verificationStatus}, #{createdTime});
+        insert into Orchard.Company (companyId, companyName, companyLocation, companyStatus, createdTime, companyInfo)
+        values (#{companyId},#{companyName}, #{companyLocation}, #{companyStatus}, #{createdTime}, #{companyInfo});
+    </insert>
+
+    //todo
+    <insert id="addCustomerDetails" parameterType="com.wu.common.domain.company.Company$CompanyDetails">
+        insert into Orchard.Company (companyId, businessLicense, businessLicenseBack, password, verificationStatus)
+        values (#{companyId},#{businessLicense}, #{businessLicenseBack}, #{password}, #{verificationStatus});
     </insert>
 
     <select id="queryById" resultType="com.wu.common.domain.company.Company" parameterType="String">
@@ -15,5 +21,24 @@
     <select id="queryAll" resultType="com.wu.common.domain.company.Company">
         select * from Orchard.Company;
     </select>
+    
+<!--    <update id="updateCompanyInfo" parameterType="com.wu.common.domain.company.Company" >-->
+<!--        update Orchard.Company set-->
+<!--    </update>-->
+    
+    <update id="updateCompanyName" parameterType="String">
+        update Orchard.Company set companyName = #{newCompanyName} where companyId = #{companyId}
+    </update>
 
+    <update id="updateCompanyLocation" parameterType="String">
+        update Orchard.Company set companyLocation = #{newLocation} where companyId = #{companyId}
+    </update>
+
+    <update id="updateCompanyName" parameterType="String">
+        update Orchard.Company set companyStatus = #{newStatus} where companyId = #{companyId}
+    </update>
+
+    <update id="updateCompanyName" parameterType="String">
+        update Orchard.Company set companyInfo = #{newCompanyInfo} where companyId = #{companyId}
+    </update>
 </mapper>

@@ -3,7 +3,9 @@ package com.wu.web.controller;
 import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Good;
 import com.wu.web.dao.OrderDao;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import java.util.UUID;
  **/
 
 @RestController
+@Slf4j
 public class MainOrderController {
 
     OrderDao orderDao;
@@ -105,6 +108,11 @@ public class MainOrderController {
         return "redirect:/list";
     }
 
+    /**
+    *todo ?
+    *done every 1am on Sundays
+     **/
+    @Scheduled(cron = "0 0 1 ? * L")
     public String orderFinished(Model model, MainOrder subOrder) {
         MainOrder.subOrder newOrder = orderDao.orderFinished(subOrder.getMainOrderId());
         model.addAttribute("orderFinished", newOrder);

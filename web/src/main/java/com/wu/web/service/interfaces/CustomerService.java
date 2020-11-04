@@ -16,12 +16,12 @@ public interface CustomerService {
 
     boolean addCustomer (Customer customer);
 
-    Customer queryById (String CustomerId);
+    Customer queryByCustomerId (String CustomerId);
+
+    Customer queryByCustomerName(String customerName);
 
     List<Customer> queryAll();
 
-//    List<MainOrder> purchase(List<MainOrder> orders);
-//
-//    MainOrder orderFinished(MainOrder mainOrder);
+    Customer updateCustomerInfo (Customer customer);
 
 }

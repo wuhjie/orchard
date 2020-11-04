@@ -20,23 +20,23 @@
     </select>
 
     <insert id = "inShoppingCart" parameterType="com.wu.common.domain.company.Good">
-        insert into Orchard.subOrder values (#{customerId}, #{goodId}, #{goodPrice}, #{shippingPrice}, #{createdTime}, #{finishedTime}, #{orderStatus}, #{shippingAddress}, #{goodName}, #{companyId}, #{companyName}, #{deliveryAddress}, #{amount}, #{expressId}, #{subOrderId})
+        insert into Orchard.subOrder values (#{customerId}, #{goodId}, #{goodPrice}, #{shippingPrice}, #{createdTime}, #{finishedTime}, #{orderStatus}, #{shippingAddress}, #{goodName}, #{companyId}, #{companyName}, #{deliveryAddress}, #{amount}, #{expressId}, #{subOrderId}, #{mainOrder})
     </insert>
 
     <!--    orderpending-->
-    <update id="purchase" parameterType="com.wu.common.domain.MainOrder">
+    <update id="purchase" parameterType="com.wu.common.domain.MainOrder$subOrder">
         update Orchard.subOrder set orderStatus=1 where goodId in
         <foreach collection="orders" item="goodId" separator=",">
         </foreach>
     </update>
 
-    <insert id="subOrderIntoMainOrder" parameterType="com.wu.common.domain.MainOrder">
+    <insert id="subOrderIntoMainOrder" parameterType="com.wu.common.domain.MainOrder$subOrder">
         insert into Orchard.MainOrder values (#{customerId}, #{mainOrderId}, #{mainOrderPrice}, #{mainOrderStatus}, #{amount})
         <foreach collection="orders" item="goodId">
         </foreach>
     </insert>
 
-    <update id="itemSelected" parameterType="com.wu.common.domain.MainOrder">
+    <update id="itemSelected" parameterType="com.wu.common.domain.MainOrder$subOrder">
         update Orchard.subOrder set orderStatus=8 where subOrderId = #{subOrderId}
     </update>
 

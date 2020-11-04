@@ -1,5 +1,8 @@
 package com.wu.web.controller;
 
+import com.wu.common.domain.customer.Customer;
+import com.wu.web.dao.CustomerDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -15,18 +18,34 @@ todo: corresponding html page
  */
 
 @Controller
-public class LoginController  {
+public class CustomerLoginController {
 
+    /**
+     * todo
+     * @param customerUserName
+     * @param password
+     * @param model
+     * @param session
+     * @return
+     */
     @RequestMapping("/user/login")
     public String login (
-            @RequestParam("username") String username,
+            @RequestParam("customerUserName") String customerUserName,
             @RequestParam("password") String password,
             Model model, HttpSession session) {
-        if (!StringUtils.isEmpty(username) && "123".equals(password)) {
-            session.setAttribute("user", username);
+        if (!StringUtils.isEmpty(customerUserName) && "123".equals(password)) {
+            session.setAttribute("user", customerUserName);
             return "redirect:/main.html";
         }
+//        CustomerDao customerDao;
 
+
+//        Customer currentCustomer = customerDao.queryByCustomerName(customerUserName);
+//
+//        if {
+//
+//        }
+//
         else {
             model.addAttribute("msg", "wrong");
             return "index";

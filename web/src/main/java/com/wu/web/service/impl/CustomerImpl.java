@@ -27,34 +27,33 @@ public class CustomerImpl implements CustomerService {
         this.customerDao = customerDao;
     }
 
-
     @Override
     public boolean addCustomer(Customer customer) {
         setCustomerDao(customerDao);
+
         return customerDao.addCustomer(customer);
     }
 
     @Override
-    public Customer queryById(String customerId) {
+    public Customer queryByCustomerId(String customerId) {
         setCustomerDao(customerDao);
-        return customerDao.queryById(customerId);
+        return customerDao.queryByCustomerId(customerId);
+    }
+
+    @Override
+    public Customer queryByCustomerName(String customerName) {
+        return null;
     }
 
     @Override
     public List<Customer> queryAll() {
         setCustomerDao(customerDao);
-        return customerDao.queryAll();
+        return customerDao.queryAllCustomer();
     }
 
-//    @Override
-//    public List<MainOrder> purchase(List<MainOrder> orders) {
-//        setCustomerDao(customerDao);
-//        return customerDao.purchase(orders);
-//    }
-//
-//    @Override
-//    public MainOrder orderFinished(MainOrder mainOrder) {
-//        setCustomerDao(customerDao);
-//        return customerDao.orderFinished(mainOrder);
-//    }
+    @Override
+    public Customer updateCustomerInfo(Customer customer) {
+        setCustomerDao(customerDao);
+        return customerDao.updateCustomerInfo(customer);
+    }
 }

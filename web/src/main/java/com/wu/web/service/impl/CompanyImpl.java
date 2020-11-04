@@ -1,12 +1,13 @@
 package com.wu.web.service.impl;
 
-import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Company;
+import com.wu.common.domain.customer.Customer;
 import com.wu.web.dao.CompanyDao;
 import com.wu.web.service.interfaces.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -28,22 +29,53 @@ public class CompanyImpl implements CompanyService {
     }
 
     @Override
-    public boolean addCompany(Company company) {
+    public boolean addCompany(Company company, HttpServletRequest request) {
         setCompanyDao(companyDao);
         return companyDao.addCompany(company);
     }
 
     @Override
-    public Company queryById(String companyId) {
+    public Company queryByCompanyId(String companyId, HttpServletRequest request) {
         setCompanyDao(companyDao);
-        return companyDao.queryById(companyId);
+        return companyDao.queryByCompanyId(companyId, request);
     }
 
     @Override
-    public List<Company> queryAll() {
+    public List<Company> queryAllCompany() {
         setCompanyDao(companyDao);
-        return companyDao.queryAll();
+        return companyDao.queryAllCompany();
     }
 
+//    @Override
+//    public Company updateCompanyInfo(Company company) {
+//        setCompanyDao(companyDao);
+//        return companyDao.updateCompanyInfo(company);
+//    }
 
+    @Override
+    public Company updateCompanyName(Company company, String newCompanyName) {
+        setCompanyDao(companyDao);
+        return companyDao.updateCompanyName(company.getCompanyId(), newCompanyName);
+    }
+
+    @Override
+    public Company updateCompanyLocation(Company company, String newLocation) {
+        setCompanyDao(companyDao);
+        String companyId = company.getCompanyId();
+        return companyDao.updateCompanyLocation(companyId, newLocation);
+    }
+
+    @Override
+    public Company updateCompanyStatus(Company company, Integer newStatus) {
+        setCompanyDao(companyDao);
+        String companyId = company.getCompanyId();
+        return companyDao.updateCompanyStatus(companyId, newStatus);
+    }
+
+    @Override
+    public Company updateCompanyInfo(Company company, String newInfo) {
+        setCompanyDao(companyDao);
+        String companyId = company.getCompanyId();
+        return companyDao.updateCompanyInfo(companyId, newInfo);
+    }
 }

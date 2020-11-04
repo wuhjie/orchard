@@ -1,12 +1,15 @@
 package com.wu.web.controller;
 
+import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Company;
 import com.wu.web.service.interfaces.CompanyService;
 import com.wu.web.service.interfaces.CustomerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -18,6 +21,7 @@ import java.util.List;
  **/
 
 @RestController
+
 public class CompanyController {
 
     CompanyService companyService;
@@ -28,13 +32,14 @@ public class CompanyController {
     }
 
     @RequestMapping("/company/add")
-    public boolean addCompany(Company company) {
-        return companyService.addCompany(company);
+    public boolean addCompany(Company company, HttpServletRequest request) {
+
+        return companyService.addCompany(company, request);
     }
 
-    @GetMapping("company/queryById/{companyId}")
-    public Company queryById(@PathVariable("companyId") String companyId) {
-        Company company = companyService.queryById(companyId);
+    @GetMapping("company/queryByCompanyId/{companyId}")
+    public Company queryByCompanyId(@PathVariable("companyId") String companyId, HttpServletRequest request) {
+        Company company = companyService.queryByCompanyId(companyId, request);
 
         if (company == null) {
             throw new RuntimeException("fail");
@@ -43,7 +48,21 @@ public class CompanyController {
     }
 
     @RequestMapping("/company")
-    public String queryAll() {
+    public String queryAllCompany() {
         return "redirect:/list.html";
     }
+
+    /**
+     * todo
+     * submitted verification form
+     */
+    public void submittedVerificationForm (Company company){
+
+    }
+
+    public void sendItem (MainOrder mainOrder) {
+
+    }
+
+
 }

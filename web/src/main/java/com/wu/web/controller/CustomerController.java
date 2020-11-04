@@ -44,7 +44,7 @@ public class CustomerController {
 
     @GetMapping("customer/queryById/{customerId}")
     public Customer queryById(@PathVariable("customerId") String customerId) {
-        Customer customer = customerDao.queryById(customerId);
+        Customer customer = customerDao.queryByCustomerId(customerId);
         if (customer == null) {
             throw new RuntimeException("fail");
         }
@@ -53,7 +53,7 @@ public class CustomerController {
 
     @GetMapping("/customer")
     public String queryAll(Model model) {
-        Collection<Customer> customerCollection = customerDao.queryAll();
+        Collection<Customer> customerCollection = customerDao.queryAllCustomer();
         model.addAttribute("customer", customerCollection);
         return "customer/list";
     }
