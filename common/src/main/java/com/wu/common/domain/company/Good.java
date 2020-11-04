@@ -28,7 +28,7 @@ public class Good {
 
     @Id
     @GeneratedValue
-    public UUID goodId;
+    public String goodId;
 
     @Column
     public String goodName;

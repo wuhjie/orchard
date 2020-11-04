@@ -36,7 +36,7 @@ public class MainOrder implements Serializable {
 
     @Id
     @GeneratedValue
-    UUID mainOrderId;
+    String mainOrderId;
 
     @Column
     BigDecimal mainOrderPrice;
@@ -47,6 +47,13 @@ public class MainOrder implements Serializable {
     @Column
     Integer amount;
 
+    public MainOrder(String customerId, BigDecimal mainOrderPrice, Integer mainOrderStatus, Integer amount) {
+        this.customerId = customerId;
+        this.mainOrderPrice = mainOrderPrice;
+        this.mainOrderStatus = mainOrderStatus;
+        this.amount = amount;
+        this.mainOrderId = UUID.randomUUID().toString();
+    }
 
     /**
      * @ClassName MainOrder
@@ -64,7 +71,7 @@ public class MainOrder implements Serializable {
     public static class subOrder implements Serializable {
 
         @Column(nullable = false, unique = true)
-        UUID customerId;
+        String customerId;
 
         @Column
         String goodId;
@@ -107,7 +114,25 @@ public class MainOrder implements Serializable {
 
         @Id
         @GeneratedValue
-        UUID subOrderId;
+        String subOrderId;
+
+        public subOrder(String customerId, String goodId, BigDecimal goodPrice, BigDecimal shippingPrice, Date createdTime, Date finishedTime, OrderStatus orderStatus, String shippingAddress, String goodName, String companyId, String companyName, String deliveryAddress, Integer amount, String expressId) {
+            this.customerId = customerId;
+            this.goodId = goodId;
+            this.goodPrice = goodPrice;
+            this.shippingPrice = shippingPrice;
+            this.createdTime = createdTime;
+            this.finishedTime = finishedTime;
+            this.orderStatus = orderStatus;
+            this.shippingAddress = shippingAddress;
+            this.goodName = goodName;
+            this.companyId = companyId;
+            this.companyName = companyName;
+            this.deliveryAddress = deliveryAddress;
+            this.amount = amount;
+            this.expressId = expressId;
+            this.customerId = UUID.randomUUID().toString();
+        }
 
         public static enum OrderStatus {
 

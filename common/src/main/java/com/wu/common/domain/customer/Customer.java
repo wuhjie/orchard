@@ -33,7 +33,7 @@ public class Customer implements Serializable {
 
     @Id
     @GeneratedValue
-    private UUID customerId;
+    private String customerId;
 
     @Column(nullable = false, unique = true)
     private String nickname;
@@ -61,4 +61,19 @@ public class Customer implements Serializable {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date birthday;
 
+    @Column
+    private String password;
+
+    public Customer(String nickname, Integer grade, String tel, String location, Integer status, Date createdTime, Integer gender, Date birthday,String password) {
+        this.customerId = UUID.randomUUID().toString();
+        this.nickname = nickname;
+        this.grade = grade;
+        this.tel = tel;
+        this.location = location;
+        this.status = status;
+        this.createdTime = createdTime;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.password = password;
+    }
 }

@@ -1,14 +1,14 @@
 package com.wu.common.domain.company;
 
+import com.wu.common.utils.ImageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.sql.Blob;
 import java.util.Date;
 import java.util.UUID;
 
@@ -25,11 +25,13 @@ import java.util.UUID;
 @Getter
 @Setter
 @Accessors(chain = true)
+@Entity
+
 public class Company {
 
     @Id
     @GeneratedValue
-    UUID companyId;
+    String companyId;
 
     @Column
     String companyLocation;
@@ -42,5 +44,29 @@ public class Company {
 
     @Column
     Date createdTime;
+
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter
+    @Setter
+    @Accessors(chain = true)
+    @Entity
+    public static class CompanyDetails {
+
+        @Id
+        @GeneratedValue
+        String companyId;
+
+        @Lob
+        Blob businessLicense;
+
+        @Lob
+        Blob businessLicenseBack;
+
+        @Column(columnDefinition = "Text")
+        String companyInfo;
+
+    }
 
 }

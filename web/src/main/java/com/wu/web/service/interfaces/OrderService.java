@@ -18,7 +18,7 @@ public interface OrderService {
 
 //    MainOrder.subOrder addOrder(MainOrder mainOrder);
 
-    MainOrder.subOrder queryByOrderId(UUID orderId);
+    MainOrder.subOrder queryByOrderId(String orderId);
 
     List<MainOrder.subOrder> queryAll(Customer customer);
 

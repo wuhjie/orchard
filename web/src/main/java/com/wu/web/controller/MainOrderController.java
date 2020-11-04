@@ -39,7 +39,7 @@ public class MainOrderController {
     }
 
     @GetMapping("mainOrder/queryById/{orderId}")
-    public String queryByOrderId(@PathVariable("orderId")Model model, UUID orderId) {
+    public String queryByOrderId(@PathVariable("orderId")Model model,String orderId) {
         MainOrder.subOrder mainOrder = orderDao.queryByOrderId(orderId);
         if (mainOrder == null) {
             return "404";
@@ -50,7 +50,7 @@ public class MainOrderController {
     }
 
     @GetMapping("mainOrder/queryByCustomerId/{customerId}")
-    public String queryAll(@PathVariable("customerId") Model model, UUID customerId) {
+    public String queryAll(@PathVariable("customerId") Model model, String customerId) {
         List<MainOrder.subOrder> mainOrderCollection = orderDao.quertAll(customerId);
         //todo
         model.addAttribute("orderWithCustomerId", mainOrderCollection);
@@ -65,12 +65,12 @@ public class MainOrderController {
     }
 
     @GetMapping("/removeFromShoppingCart")
-    public String removeFromShoppingCart(UUID subOrderId) {
+    public String removeFromShoppingCart(String subOrderId) {
         orderDao.removeFromShoppingCart(subOrderId);
         return "redirect:/shoppingCart";
     }
 
-    @GetMapping("/shoppingCart")
+//    @GetMapping("/shoppingCart")
     public void itemSelected(Model model, List<MainOrder.subOrder> subOrders) {
         List<MainOrder.subOrder> mainOrder = orderDao.itemSelected(subOrders);
         model.addAttribute("itemSelected", mainOrder);

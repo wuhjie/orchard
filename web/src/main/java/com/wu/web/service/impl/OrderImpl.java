@@ -37,7 +37,7 @@ public class OrderImpl implements OrderService {
 //    }
 
     @Override
-    public MainOrder.subOrder queryByOrderId(UUID orderId) {
+    public MainOrder.subOrder queryByOrderId(String orderId) {
         setMainOrderDao(orderDao);
         return orderDao.queryByOrderId(orderId);
     }

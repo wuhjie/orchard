@@ -22,9 +22,9 @@ public interface OrderDao {
 
     MainOrder.subOrder addOrder(MainOrder.subOrder subOrder);
 
-    MainOrder.subOrder queryByOrderId(UUID orderId);
+    MainOrder.subOrder queryByOrderId(String orderId);
 
-    List<MainOrder.subOrder> quertAll(UUID customerId);
+    List<MainOrder.subOrder> quertAll(String customerId);
 
     MainOrder.subOrder inShoppingCart(Good good);
 
@@ -34,19 +34,19 @@ public interface OrderDao {
 
     List<MainOrder> subOrderIntoMainOrder(List<MainOrder.subOrder> subOrder);
 
-    MainOrder.subOrder orderPending(UUID subOrderId);
+    MainOrder.subOrder orderPending(String subOrderId);
 
-    MainOrder.subOrder orderReceived(UUID subOrderId);
+    MainOrder.subOrder orderReceived(String subOrderId);
 
-    MainOrder.subOrder expressReceived(UUID subOrderId);
+    MainOrder.subOrder expressReceived(String subOrderId);
 
-    MainOrder.subOrder orderShipping(UUID subOrderId);
+    MainOrder.subOrder orderShipping(String subOrderId);
 
-    MainOrder.subOrder orderShipped(UUID subOrderId);
+    MainOrder.subOrder orderShipped(String subOrderId);
 
-    MainOrder.subOrder orderFinished(UUID subOrderId);
+    MainOrder.subOrder orderFinished(String subOrderId);
 
-    MainOrder.subOrder orderCancelled(UUID subOrderId);
+    MainOrder.subOrder orderCancelled(String subOrderId);
 
-    void removeFromShoppingCart(UUID subOrderId);
+    void removeFromShoppingCart(String subOrderId);
 }

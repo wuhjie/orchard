@@ -35,6 +35,7 @@ public class CustomerController {
         this.orderDao = orderDao;
     }
 
+    //create customer
     @RequestMapping("/customer/add")
     public String addCustomer(Customer customer){
         customerDao.addCustomer(customer);

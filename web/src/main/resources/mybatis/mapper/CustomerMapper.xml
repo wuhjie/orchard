@@ -5,7 +5,7 @@
 
     <insert id="addCustomer" parameterType="com.wu.common.domain.customer.Customer">
         insert into Orcahrd.Customer (customerId, nickname, grade, tel, location, status, createdTime, gender, birthday)
-        values (#{customerId},#{nickname}, #{grade}, #{tel}, #{location}, #{status}, #{createdTIme}, #{gender}, #{birthday});
+        values (#{customerId},#{nickname}, #{grade}, #{tel}, #{location}, #{status}, #{createdTIme}, #{gender}, #{birthday}, #{password});
     </insert>
 
     <select id="queryById" resultType="com.wu.common.domain.customer.Customer" parameterType="String">
