@@ -1,11 +1,10 @@
 package com.wu.web.dao;
 
-import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.customer.Customer;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * @ClassName CustomerDao
@@ -28,5 +27,9 @@ public interface CustomerDao {
     List<Customer> queryAllCustomer();
 
     Customer updateCustomerInfo (Customer customer);
+
+    Customer customerDetailsDisplay (Customer customer);
+
+    Customer findingCustomerWithId (String customerId);
 
 }

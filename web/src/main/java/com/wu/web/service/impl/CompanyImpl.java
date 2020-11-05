@@ -1,7 +1,6 @@
 package com.wu.web.service.impl;
 
 import com.wu.common.domain.company.Company;
-import com.wu.common.domain.customer.Customer;
 import com.wu.web.dao.CompanyDao;
 import com.wu.web.service.interfaces.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,33 +44,6 @@ public class CompanyImpl implements CompanyService {
         setCompanyDao(companyDao);
         return companyDao.queryAllCompany();
     }
-
-//    @Override
-//    public Company updateCompanyInfo(Company company) {
-//        setCompanyDao(companyDao);
-//        return companyDao.updateCompanyInfo(company);
-//    }
-
-    @Override
-    public Company updateCompanyName(Company company, String newCompanyName) {
-        setCompanyDao(companyDao);
-        return companyDao.updateCompanyName(company.getCompanyId(), newCompanyName);
-    }
-
-    @Override
-    public Company updateCompanyLocation(Company company, String newLocation) {
-        setCompanyDao(companyDao);
-        String companyId = company.getCompanyId();
-        return companyDao.updateCompanyLocation(companyId, newLocation);
-    }
-
-    @Override
-    public Company updateCompanyStatus(Company company, Integer newStatus) {
-        setCompanyDao(companyDao);
-        String companyId = company.getCompanyId();
-        return companyDao.updateCompanyStatus(companyId, newStatus);
-    }
-
     @Override
     public Company updateCompanyInfo(Company company, String newInfo) {
         setCompanyDao(companyDao);

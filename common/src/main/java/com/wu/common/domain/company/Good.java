@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
 
 
 /**
@@ -44,4 +43,19 @@ public class Good {
 
     @Column
     public Integer amount;
+
+    @Column
+    public Date pickTime;
+
+    public static enum goodStatus {
+
+        /**
+         * status for fruit / tree
+         */
+        immature(0, "the tree / fruit is still immature"),
+        readyToPick(1, "the tree / fruit is ready to be picked");
+
+        goodStatus(int code, String msg) {
+        }
+    }
 }

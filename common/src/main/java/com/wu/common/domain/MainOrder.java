@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -71,7 +70,7 @@ public class MainOrder implements Serializable {
     @Accessors(chain = true)
     @Entity
     @EnableScheduling
-    public static class subOrder implements Serializable {
+    public static class SubOrder implements Serializable {
 
         @Column(nullable = false, unique = true)
         String customerId;
@@ -119,7 +118,7 @@ public class MainOrder implements Serializable {
         @GeneratedValue
         String subOrderId;
 
-        public subOrder(String customerId, String goodId, BigDecimal goodPrice, BigDecimal shippingPrice, Date createdTime, Date finishedTime, OrderStatus orderStatus, String shippingAddress, String goodName, String companyId, String companyName, String deliveryAddress, Integer amount, String expressId) {
+        public SubOrder(String customerId, String goodId, BigDecimal goodPrice, BigDecimal shippingPrice, Date createdTime, Date finishedTime, OrderStatus orderStatus, String shippingAddress, String goodName, String companyId, String companyName, String deliveryAddress, Integer amount, String expressId) {
             this.customerId = customerId;
             this.goodId = goodId;
             this.goodPrice = goodPrice;
@@ -150,7 +149,10 @@ public class MainOrder implements Serializable {
             orderShipping(4, "the good is delivering"),
             orderShipped(5, "the good has been delivered"),
             orderFinished(6, "the order is finished, historic order"),
-            orderCancelled(7, "this order is cancelled");
+            orderCancelled(7, "this order is cancelled"),
+            giftPending(9, "this Order is being gifted"),
+            giftAccepted(10, "the receiver received"),
+            orderFrozen(99, "the order is frozen due to some reason");
 
             OrderStatus(int code, String msg) {
             }
@@ -159,5 +161,23 @@ public class MainOrder implements Serializable {
 
     }
 
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Accessors(chain = true)
+    @Entity
+    public static class GiftingItem {
+
+        @Id
+        @GeneratedValue
+        String senderId;
+
+        @Column
+        String receiverId;
+
+        @Column
+        String itemId;
+    }
 
 }

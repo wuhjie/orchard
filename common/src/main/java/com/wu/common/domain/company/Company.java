@@ -1,20 +1,13 @@
 package com.wu.common.domain.company;
 
-import com.aliyun.oss.model.GenericResult;
-import com.aliyun.oss.model.MultipartUpload;
-import com.wu.common.utils.ImageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.persistence.*;
-import javax.servlet.http.HttpServletRequest;
-import java.sql.Blob;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @ClassName Company

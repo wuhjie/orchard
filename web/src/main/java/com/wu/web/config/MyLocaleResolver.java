@@ -1,6 +1,5 @@
 package com.wu.web.config;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;

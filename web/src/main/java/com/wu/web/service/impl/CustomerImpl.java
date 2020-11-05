@@ -1,6 +1,5 @@
 package com.wu.web.service.impl;
 
-import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.customer.Customer;
 import com.wu.web.dao.CustomerDao;
 import com.wu.web.service.interfaces.CustomerService;
@@ -56,4 +55,6 @@ public class CustomerImpl implements CustomerService {
         setCustomerDao(customerDao);
         return customerDao.updateCustomerInfo(customer);
     }
+
+
 }

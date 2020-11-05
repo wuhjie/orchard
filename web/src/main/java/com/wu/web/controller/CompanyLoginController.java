@@ -22,7 +22,6 @@ public class CompanyLoginController {
     /**
      * todo
      */
-
     @RequestMapping("/company/login")
     public String login (
             @RequestParam("companyUserName") String companyUserName,
@@ -38,7 +37,6 @@ public class CompanyLoginController {
             return "index";
         }
     }
-
 
     @RequestMapping("/user/logout")
     public String logout(HttpSession session) {

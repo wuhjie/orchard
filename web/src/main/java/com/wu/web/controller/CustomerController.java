@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @ClassName CustomerController
@@ -63,10 +65,10 @@ public class CustomerController {
      */
 
     @GetMapping("/customer/order")
-    public String purchase(Model model, List<MainOrder.subOrder> orders) {
+    public String purchase(Model model, List<MainOrder.SubOrder> orders) {
 
-        List<MainOrder.subOrder> newOrderCollection = new ArrayList<>();
-        for (MainOrder.subOrder order : orders) {
+        List<MainOrder.SubOrder> newOrderCollection = new ArrayList<>();
+        for (MainOrder.SubOrder order : orders) {
             newOrderCollection.add(orderDao.purchase(order));
         }
         model.addAttribute("ordersMade", newOrderCollection);
@@ -74,10 +76,23 @@ public class CustomerController {
     }
 
     @PostMapping("customer/order")
-    public String orderFinished(Model model, MainOrder.subOrder subOrder) {
-        MainOrder.subOrder newOrder = orderDao.orderFinished(subOrder.getSubOrderId());
+    public String orderFinished(Model model, MainOrder.SubOrder subOrder) {
+        MainOrder.SubOrder newOrder = orderDao.orderFinished(subOrder.getSubOrderId());
         model.addAttribute("orderFinished", newOrder);
-        return  "redirect:/customer";
+        return "redirect:/customer";
+    }
+
+    //todo
+    public String updateCustomerInfo(Model model, Customer customer) {
+        Customer newCustomer = customerDao.updateCustomerInfo(customer);
+        model.addAttribute("updateCustomerInfo", newCustomer);
+        return "redirect:/customerInfo";
+    }
+
+    public String displayCustomerInfo(Model model, String customerId) {
+        Customer currentCustomer = customerDao.queryByCustomerId(customerId);
+        model.addAttribute("displayCustomerInfo", currentCustomer);
+        return String.format("customer/personalPortal%s", customerId);
     }
 
 }

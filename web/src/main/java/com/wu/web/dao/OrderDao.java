@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @ClassName OrderDao
@@ -20,33 +19,38 @@ import java.util.UUID;
 @Repository
 public interface OrderDao {
 
-    MainOrder.subOrder addOrder(MainOrder.subOrder subOrder);
+    MainOrder.SubOrder addOrder (MainOrder.SubOrder subOrder);
 
-    MainOrder.subOrder queryByOrderId(String orderId);
+    MainOrder.SubOrder queryByOrderId (String orderId);
 
-    List<MainOrder.subOrder> quertAll(String customerId);
+    List<MainOrder.SubOrder> quertAll (String customerId);
 
-    MainOrder.subOrder inShoppingCart(Good good);
+    MainOrder.SubOrder inShoppingCart (Good good);
 
-    List<MainOrder.subOrder> itemSelected(List<MainOrder.subOrder> subOrder);
+    List<MainOrder.SubOrder> itemSelected (List<MainOrder.SubOrder> subOrder);
 
-    MainOrder.subOrder purchase(MainOrder.subOrder subOrders);
+    MainOrder.SubOrder purchase (MainOrder.SubOrder subOrders);
 
-    List<MainOrder> subOrderIntoMainOrder(List<MainOrder.subOrder> subOrder);
+    MainOrder subOrderIntoMainOrder (List<MainOrder.SubOrder> subOrder);
 
-    MainOrder.subOrder orderPending(String subOrderId);
+    MainOrder.SubOrder orderPending (String subOrderId);
 
-    MainOrder.subOrder orderReceived(String subOrderId);
+    MainOrder.SubOrder orderReceived (String subOrderId);
 
-    MainOrder.subOrder expressReceived(String subOrderId);
+    MainOrder.SubOrder expressReceived (String subOrderId);
 
-    MainOrder.subOrder orderShipping(String subOrderId);
+    MainOrder.SubOrder orderShipping (String subOrderId);
 
-    MainOrder.subOrder orderShipped(String subOrderId);
+    MainOrder.SubOrder orderShipped (String subOrderId);
 
-    MainOrder.subOrder orderFinished(String subOrderId);
+    MainOrder.SubOrder orderFinished (String subOrderId);
 
-    MainOrder.subOrder orderCancelled(String subOrderId);
+    MainOrder.SubOrder orderCancelled (String subOrderId);
 
-    void removeFromShoppingCart(String subOrderId);
+    void removeFromShoppingCart (String subOrderId, String customerId);
+
+    MainOrder.GiftingItem giftPending (MainOrder.SubOrder subOrder);
+
+    void receivingItem (MainOrder.GiftingItem giftingItem);
+
 }

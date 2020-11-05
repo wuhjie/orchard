@@ -1,6 +1,5 @@
 package com.wu.web.service.interfaces;
 
-import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.customer.Customer;
 
 import java.util.List;

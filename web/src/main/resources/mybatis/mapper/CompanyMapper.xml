@@ -10,7 +10,7 @@
 
     //todo
     <insert id="addCustomerDetails" parameterType="com.wu.common.domain.company.Company$CompanyDetails">
-        insert into Orchard.Company (companyId, businessLicense, businessLicenseBack, password, verificationStatus)
+        insert into Orchard.CompanyDetails (companyId, businessLicense, businessLicenseBack, password, verificationStatus)
         values (#{companyId},#{businessLicense}, #{businessLicenseBack}, #{password}, #{verificationStatus});
     </insert>
 
@@ -21,24 +21,11 @@
     <select id="queryAll" resultType="com.wu.common.domain.company.Company">
         select * from Orchard.Company;
     </select>
-    
-<!--    <update id="updateCompanyInfo" parameterType="com.wu.common.domain.company.Company" >-->
-<!--        update Orchard.Company set-->
-<!--    </update>-->
-    
-    <update id="updateCompanyName" parameterType="String">
-        update Orchard.Company set companyName = #{newCompanyName} where companyId = #{companyId}
+
+    // todo
+    <update id="updateCompanyInfo" parameterType="com.wu.common.domain.company.Company">
+        update Orchard.Company set (companyName = #{companyName}, companyLocation = #{companyLocation}, companyStatus = #{companyStatus}, companyInfo = #{companyInfo}) where companyId = #{companyId};
+
     </update>
 
-    <update id="updateCompanyLocation" parameterType="String">
-        update Orchard.Company set companyLocation = #{newLocation} where companyId = #{companyId}
-    </update>
-
-    <update id="updateCompanyName" parameterType="String">
-        update Orchard.Company set companyStatus = #{newStatus} where companyId = #{companyId}
-    </update>
-
-    <update id="updateCompanyName" parameterType="String">
-        update Orchard.Company set companyInfo = #{newCompanyInfo} where companyId = #{companyId}
-    </update>
 </mapper>

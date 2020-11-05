@@ -40,21 +40,9 @@
         update Orchard.subOrder set orderStatus=8 where subOrderId = #{subOrderId}
     </update>
 
-<!--    <update id="orderReceived" parameterType="com.wu.common.domain.MainOrder">-->
-<!--        update Orchard.subOrder set orderStatus=2 where subOrderId = #{subOrderId}-->
-<!--    </update>-->
-
-<!--    <update id="expressReceived" parameterType="com.wu.common.domain.MainOrder">-->
-<!--        update Orchard.subOrder set orderStatus=3 where subOrderId = #{subOrderId}-->
-<!--    </update>-->
-
     <update id="orderShipping" parameterType="com.wu.common.domain.MainOrder">
         update Orchard.subOrder set orderStatus=4 where subOrderId = #{subOrderId}
     </update>
-
-<!--    <update id="orderShipped" parameterType="com.wu.common.domain.MainOrder">-->
-<!--        update Orchard.subOrder set orderStatus=5 where subOrderId = #{subOrderId}-->
-<!--    </update>-->
 
     <update id="orderFinished" parameterType="com.wu.common.domain.MainOrder">
         update Orchard.subOrder set orderStatus=6 where subOrderId = #{subOrderId}
@@ -72,6 +60,8 @@
     <update id="orderReceived" parameterType="com.wu.common.domain.MainOrder">
         update Orchard.subOrder set orderStatus=2 where goodId=#{orderId}
     </update>
+
+    <update
 
 <!--    -->
 

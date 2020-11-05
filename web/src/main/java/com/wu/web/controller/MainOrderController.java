@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @ClassName MainOrderController
@@ -36,14 +35,14 @@ public class MainOrderController {
     }
 
     @RequestMapping("/mainOrder/add")
-    public String addOrder(MainOrder.subOrder mainOrder) {
+    public String addOrder(MainOrder.SubOrder mainOrder) {
         orderDao.addOrder(mainOrder);
         return "redirect:/mainOrder";
     }
 
     @GetMapping("mainOrder/queryById/{orderId}")
     public String queryByOrderId(@PathVariable("orderId")Model model,String orderId) {
-        MainOrder.subOrder mainOrder = orderDao.queryByOrderId(orderId);
+        MainOrder.SubOrder mainOrder = orderDao.queryByOrderId(orderId);
         if (mainOrder == null) {
             return "404";
         }
@@ -54,7 +53,7 @@ public class MainOrderController {
 
     @GetMapping("mainOrder/queryByCustomerId/{customerId}")
     public String queryAll(@PathVariable("customerId") Model model, String customerId) {
-        List<MainOrder.subOrder> mainOrderCollection = orderDao.quertAll(customerId);
+        List<MainOrder.SubOrder> mainOrderCollection = orderDao.quertAll(customerId);
         //todo
         model.addAttribute("orderWithCustomerId", mainOrderCollection);
         return "mainOrder/list";
@@ -62,48 +61,49 @@ public class MainOrderController {
 
     @GetMapping("/shoppingCart")
     public String inShoppingCart(Model model, Good good) {
-        MainOrder.subOrder mainOrder = orderDao.inShoppingCart(good);
+        MainOrder.SubOrder mainOrder = orderDao.inShoppingCart(good);
         model.addAttribute("addToShoppingCart", mainOrder);
         return "shoppingCart";
     }
 
     @GetMapping("/removeFromShoppingCart")
-    public String removeFromShoppingCart(String subOrderId) {
-        orderDao.removeFromShoppingCart(subOrderId);
+    public String removeFromShoppingCart(String subOrderId, String customerId) {
+        orderDao.removeFromShoppingCart(subOrderId, customerId);
         return "redirect:/shoppingCart";
     }
 
 //    @GetMapping("/shoppingCart")
-    public void itemSelected(Model model, List<MainOrder.subOrder> subOrders) {
-        List<MainOrder.subOrder> mainOrder = orderDao.itemSelected(subOrders);
+    public void itemSelected(Model model, List<MainOrder.SubOrder> subOrders) {
+        List<MainOrder.SubOrder> mainOrder = orderDao.itemSelected(subOrders);
         model.addAttribute("itemSelected", mainOrder);
     }
 
     @GetMapping("mainOrder/purchasing")
-    public String purchaseAndOrderIntoMainOrder(Model model, List<MainOrder.subOrder> subOrders) {
-        List<MainOrder.subOrder> newSubOrders = new ArrayList<>();
-        for (MainOrder.subOrder subOrder : subOrders) {
+    public String purchaseAndOrderIntoMainOrder(Model model, List<MainOrder.SubOrder> subOrders) {
+        List<MainOrder.SubOrder> newSubOrders = new ArrayList<>();
+        for (MainOrder.SubOrder subOrder : subOrders) {
             newSubOrders.add(orderDao.purchase(subOrder));
         }
-        List<MainOrder> mainOrders = orderDao.subOrderIntoMainOrder(newSubOrders);
-
+        MainOrder mainOrders = orderDao.subOrderIntoMainOrder(newSubOrders);
+        model.addAttribute("purchasing", mainOrders);
         return "purchasing";
     }
 
     //todo
-    public String orderPending(Model model, MainOrder.subOrder subOrder) {
-        MainOrder.subOrder newOrder = orderDao.orderPending(subOrder.getSubOrderId());
+    public String orderPending(Model model, MainOrder.SubOrder subOrder) {
+        MainOrder.SubOrder newOrder = orderDao.orderPending(subOrder.getSubOrderId());
+        model.addAttribute("orderPending", newOrder);
         return "redirect:/orders";
     }
 
     public String orderReceived(Model model, MainOrder subOrder) {
-        MainOrder.subOrder newOrder = orderDao.orderReceived(subOrder.getMainOrderId());
+        MainOrder.SubOrder newOrder = orderDao.orderReceived(subOrder.getMainOrderId());
         model.addAttribute("orderReceived", newOrder);
         return "redirect:/mainOrder/list";
     }
 
     public String expressReceived(Model model, MainOrder subOrder) {
-        MainOrder.subOrder newOrder = orderDao.expressReceived(subOrder.getMainOrderId());
+        MainOrder.SubOrder newOrder = orderDao.expressReceived(subOrder.getMainOrderId());
         model.addAttribute("expressedReceived", newOrder);
         return "redirect:/list";
     }
@@ -114,16 +114,34 @@ public class MainOrderController {
      **/
     @Scheduled(cron = "0 0 1 ? * L")
     public String orderFinished(Model model, MainOrder subOrder) {
-        MainOrder.subOrder newOrder = orderDao.orderFinished(subOrder.getMainOrderId());
+        MainOrder.SubOrder newOrder = orderDao.orderFinished(subOrder.getMainOrderId());
         model.addAttribute("orderFinished", newOrder);
         return "redirect:/mainOrder";
     }
 
     //todo
-    public String orderCancelled(Model model, MainOrder subOrder) {
-        MainOrder.subOrder newOrder = orderDao.orderCancelled(subOrder.getMainOrderId());
+    public String orderCancelled(Model model, MainOrder.SubOrder subOrder) {
+        MainOrder.SubOrder newOrder = orderDao.orderCancelled(subOrder.getSubOrderId());
         model.addAttribute("orderCancelled", newOrder);
         return "redirect:/cancelled";
+    }
+
+    public String giftPending(Model model, MainOrder.SubOrder subOrder) {
+        MainOrder.GiftingItem giftingOrder = orderDao.giftPending(subOrder);
+        //the order is frozen in this process
+        subOrder.setOrderStatus(MainOrder.SubOrder.OrderStatus.orderFrozen);
+        model.addAttribute("giftPending", giftingOrder);
+        return "customer/giftingCenter";
+    }
+
+    public String giftReceiving(Model model, MainOrder.GiftingItem giftingItem) {
+        orderDao.receivingItem(giftingItem);
+        String senderId = giftingItem.getSenderId();
+        //making giftItem as a order and add it back to the sender orders
+        orderDao.removeFromShoppingCart(giftingItem.getItemId(), senderId);
+        MainOrder.SubOrder addedOrder =  orderDao.addOrder(orderDao.queryByOrderId(giftingItem.getItemId()));
+        model.addAttribute("giftReceiving", addedOrder);
+        return "customer/giftingCenter";
     }
 
 

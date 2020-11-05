@@ -1,7 +1,6 @@
 package com.wu.web.service.interfaces;
 
 import com.wu.common.domain.company.Company;
-import com.wu.common.domain.customer.Customer;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,14 +19,6 @@ public interface CompanyService {
     Company queryByCompanyId(String companyId, HttpServletRequest request);
 
     List<Company> queryAllCompany();
-
-//    Company updateCompanyInfo (Company company);
-
-    Company updateCompanyName(Company company, String newCompanyName);
-
-    Company updateCompanyLocation(Company company, String newLocation);
-
-    Company updateCompanyStatus(Company company, Integer newStatus);
 
     Company updateCompanyInfo(Company company, String newInfo);
 }

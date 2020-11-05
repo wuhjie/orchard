@@ -3,9 +3,9 @@ package com.wu.web.service.interfaces;
 import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Good;
 import com.wu.common.domain.customer.Customer;
+import org.jboss.jandex.Main;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @ClassName OrderService
@@ -18,32 +18,36 @@ public interface OrderService {
 
 //    MainOrder.subOrder addOrder(MainOrder mainOrder);
 
-    MainOrder.subOrder queryByOrderId(String orderId);
+    MainOrder.SubOrder queryByOrderId(String orderId);
 
-    List<MainOrder.subOrder> queryAll(Customer customer);
+    List<MainOrder.SubOrder> queryAll(Customer customer);
 
-    MainOrder.subOrder purchase(MainOrder.subOrder subOrder);
+    MainOrder.SubOrder purchase(MainOrder.SubOrder subOrder);
 
-    MainOrder.subOrder subOrderIntoMainOrder(List<MainOrder.subOrder> orders);
+    MainOrder subOrderIntoMainOrder(List<MainOrder.SubOrder> orders);
 //    MainOrder statusChanged(String orderId, MainOrder.subOrder.OrderStatus changedStatus);
 
-    MainOrder.subOrder inShoppingCart(Good good);
+    MainOrder.SubOrder inShoppingCart(Good good);
 
-    MainOrder.subOrder orderPending(MainOrder.subOrder subOrder);
+    MainOrder.SubOrder orderPending(MainOrder.SubOrder subOrder);
 
-    MainOrder.subOrder orderReceived(MainOrder.subOrder subOrder);
+    MainOrder.SubOrder orderReceived(MainOrder.SubOrder subOrder);
 
-    MainOrder.subOrder expressReceived(MainOrder.subOrder subOrder);
+    MainOrder.SubOrder expressReceived(MainOrder.SubOrder subOrder);
 
-    MainOrder.subOrder orderShipping(MainOrder.subOrder subOrder);
+    MainOrder.SubOrder orderShipping(MainOrder.SubOrder subOrder);
 
-    MainOrder.subOrder orderShipped(MainOrder.subOrder subOrder);
+    MainOrder.SubOrder orderShipped(MainOrder.SubOrder subOrder);
 
-    MainOrder.subOrder orderFinished(MainOrder.subOrder subOrder);
+    MainOrder.SubOrder orderFinished(MainOrder.SubOrder subOrder);
 
-    MainOrder.subOrder orderCancelled(MainOrder.subOrder subOrder);
+    MainOrder.SubOrder orderCancelled(MainOrder.SubOrder subOrder);
 
-    void removeFromShoppingCart(MainOrder.subOrder subOrder);
+    void removeFromShoppingCart(MainOrder.SubOrder subOrder, String customerId);
+
+    MainOrder.GiftingItem giftPending (MainOrder.SubOrder subOrder);
+
+    void receivingGift (MainOrder.GiftingItem giftingItem);
 
 
 }

@@ -16,9 +16,8 @@
         select * from Orcahrd.Customer;
     </select>
 
-<!--    <update id="purchase" parameterType="com.wu.common.domain.MainOrder">-->
-<!--        update subOrder set orderStatus = '1' where (select * from subOrder where customerId = #{customerId}-->
-<!--            where goodId = #{goodId});-->
-<!--    </update>-->
+    <update id="updateCustomerInfo" parameterType="com.wu.common.domain.customer.Customer">
+        update Orchar.Customer set nickname = #{nickname}, tel = #{tel}, location = #{location}, gender = #{gender}, birthday = #{birthday}, password = #{password}) where customerId = #{customerId};
+    </update>
 
 </mapper>

@@ -1,6 +1,5 @@
 package com.wu.web.dao;
 
-import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Company;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -35,5 +34,6 @@ public interface CompanyDao {
     Company updateCompanyStatus(String companyId, Integer newStatus);
 
     Company updateCompanyInfo(String companyId, String newCompanyInfo);
+
 
 }

@@ -1,6 +1,5 @@
 package com.wu.web.controller;
 
-import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Good;
 import com.wu.web.service.interfaces.GoodService;
 import com.wu.web.service.interfaces.OrderService;

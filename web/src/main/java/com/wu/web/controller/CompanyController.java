@@ -3,14 +3,13 @@ package com.wu.web.controller;
 import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Company;
 import com.wu.web.service.interfaces.CompanyService;
-import com.wu.web.service.interfaces.CustomerService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @ClassName ConpanyController
@@ -60,6 +59,10 @@ public class CompanyController {
 
     }
 
+    /**
+     * for changing status of order
+     * @param mainOrder
+     */
     public void sendItem (MainOrder mainOrder) {
 
     }
