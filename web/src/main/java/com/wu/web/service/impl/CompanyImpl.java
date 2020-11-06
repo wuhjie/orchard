@@ -28,15 +28,15 @@ public class CompanyImpl implements CompanyService {
     }
 
     @Override
-    public boolean addCompany(Company company, HttpServletRequest request) {
+    public boolean addCompany(Company company) {
         setCompanyDao(companyDao);
         return companyDao.addCompany(company);
     }
 
     @Override
-    public Company queryByCompanyId(String companyId, HttpServletRequest request) {
+    public Company queryByCompanyId(String companyId) {
         setCompanyDao(companyDao);
-        return companyDao.queryByCompanyId(companyId, request);
+        return companyDao.queryByCompanyId(companyId);
     }
 
     @Override
@@ -45,9 +45,9 @@ public class CompanyImpl implements CompanyService {
         return companyDao.queryAllCompany();
     }
     @Override
-    public Company updateCompanyInfo(Company company, String newInfo) {
+    public Company updateCompanyInfo(Company company) {
         setCompanyDao(companyDao);
         String companyId = company.getCompanyId();
-        return companyDao.updateCompanyInfo(companyId, newInfo);
+        return companyDao.updateCompanyInfo(companyId);
     }
 }

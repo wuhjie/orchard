@@ -4,16 +4,16 @@
 <mapper namespace="com.wu.web.dao.GoodDao">
 
     <insert id="addGood" parameterType="com.wu.common.domain.company.Good">
-        insert into Good (goodId, goodName, createdTime, price, companyId)
-        value (#{goodId}, #{goodName}, #{createdTime}, #{price}, #{companyId});
+        insert into Orchard.Good (goodId, goodName, createdTime, price, companyId, amount, pickTime)
+        value (#{goodId}, #{goodName}, #{createdTime}, #{price}, #{companyId}, #{amount}, #{pickTime});
     </insert>
 
     <select id="queryById" resultType="com.wu.common.domain.company.Good" parameterType="String">
-        select * from Good where goodId = #{customerId}
+        select * from Orchard.Good where goodId = #{customerId}
     </select>
 
     <select id="queryAll" resultType="com.wu.common.domain.company.Good">
-        select * from Good;
+        select * from Orchard.Good where goodId = ?;
     </select>
 
 </mapper>

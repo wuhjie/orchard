@@ -20,7 +20,7 @@ public interface OrderService {
 
     MainOrder.SubOrder queryByOrderId(String orderId);
 
-    List<MainOrder.SubOrder> queryAll(Customer customer);
+    List<MainOrder.SubOrder> queryAllWithCustomerId(String customerId);
 
     MainOrder.SubOrder purchase(MainOrder.SubOrder subOrder);
 

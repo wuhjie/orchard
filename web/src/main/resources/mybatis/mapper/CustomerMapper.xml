@@ -13,7 +13,7 @@
     </select>
 
     <select id="queryAll" resultType="com.wu.common.domain.customer.Customer">
-        select * from Orcahrd.Customer;
+        select * from Orcahrd.Customer where customerId = ?;
     </select>
 
     <update id="updateCustomerInfo" parameterType="com.wu.common.domain.customer.Customer">

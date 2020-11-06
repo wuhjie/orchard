@@ -2,14 +2,17 @@ package com.wu.web.controller;
 
 import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Company;
+import com.wu.web.dao.CompanyDao;
 import com.wu.web.service.interfaces.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @ClassName ConpanyController
@@ -23,48 +26,36 @@ import javax.servlet.http.HttpServletRequest;
 
 public class CompanyController {
 
-    CompanyService companyService;
+    CompanyDao companyDao;
 
     @Autowired
-    public void setCompanyService(CompanyService companyService) {
-        this.companyService = companyService;
+    public void setCompanyDao(CompanyDao companyDao) {
+        this.companyDao = companyDao;
     }
 
-    @RequestMapping("/company/add")
-    public boolean addCompany(Company company, HttpServletRequest request) {
-
-        return companyService.addCompany(company, request);
+    public String addCompany(Company company, Company.CompanyDetails companyDetails) {
+        // add both details for a company
+        companyDao.addCompany(company);
+        companyDao.addCompanyDetail(companyDetails);
+        return String.format("company/companyPortal%s", company.getCompanyId());
     }
 
-    @GetMapping("company/queryByCompanyId/{companyId}")
-    public Company queryByCompanyId(@PathVariable("companyId") String companyId, HttpServletRequest request) {
-        Company company = companyService.queryByCompanyId(companyId, request);
-
-        if (company == null) {
-            throw new RuntimeException("fail");
-        }
-        return company;
+    public String queryCompanyById(@PathVariable("companyId") String companyId, Model model) {
+        Company company = companyDao.queryByCompanyId(companyId);
+        model.addAttribute("queryCompanyById", company);
+        return "redirect:/company/list";
     }
 
-    @RequestMapping("/company")
-    public String queryAllCompany() {
-        return "redirect:/list.html";
+    public String queryAllCompany(Model model) {
+        List<Company> companyList = companyDao.queryAllCompany();
+        model.addAttribute("queryAllCompany", companyList);
+        return "company/list";
     }
 
-    /**
-     * todo
-     * submitted verification form
-     */
-    public void submittedVerificationForm (Company company){
-
-    }
-
-    /**
-     * for changing status of order
-     * @param mainOrder
-     */
-    public void sendItem (MainOrder mainOrder) {
-
+    public String updateCompanyInfo (Model model, String companyId) {
+        Company updatedCompany = companyDao.updateCompanyInfo(companyId);
+        model.addAttribute("updateCompanyInfo", updatedCompany);
+        return "redirect:/company/companyPortal";
     }
 
 

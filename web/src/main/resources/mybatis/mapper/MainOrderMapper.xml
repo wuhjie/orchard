@@ -10,13 +10,17 @@
     </insert>
 
 <!--    queryBuOrderId-->
-    <select id="queryByOrderId" parameterType="com.wu.common.domain.MainOrder">
+    <select id="queryByOrderId" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         select * from Orchard.subOrder where goodId = #{orderId}
     </select>
 
 <!--    queryBycustomerId-->
-    <select id="queryByCustomerId" parameterType="com.wu.common.domain.MainOrder">
+    <select id="queryAllWithCustomerId" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         select * from Orchard.subOrder where customerId = #{customerId};
+    </select>
+
+    <select id="queryAll" resultType="com.wu.common.domain.MainOrder$SubOrder">
+        select * from Orchard.subOrder where customerId = ?
     </select>
 
     <insert id = "inShoppingCart" parameterType="com.wu.common.domain.company.Good">
@@ -24,45 +28,49 @@
     </insert>
 
     <!--    orderpending-->
-    <update id="purchase" parameterType="com.wu.common.domain.MainOrder$subOrder">
+    <update id="purchase" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         update Orchard.subOrder set orderStatus=1 where goodId in
         <foreach collection="orders" item="goodId" separator=",">
         </foreach>
     </update>
 
-    <insert id="subOrderIntoMainOrder" parameterType="com.wu.common.domain.MainOrder$subOrder">
+    <insert id="subOrderIntoMainOrder" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         insert into Orchard.MainOrder values (#{customerId}, #{mainOrderId}, #{mainOrderPrice}, #{mainOrderStatus}, #{amount})
         <foreach collection="orders" item="goodId">
         </foreach>
     </insert>
 
-    <update id="itemSelected" parameterType="com.wu.common.domain.MainOrder$subOrder">
+    <update id="itemSelected" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         update Orchard.subOrder set orderStatus=8 where subOrderId = #{subOrderId}
     </update>
 
-    <update id="orderShipping" parameterType="com.wu.common.domain.MainOrder">
+    <update id="orderShipping" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         update Orchard.subOrder set orderStatus=4 where subOrderId = #{subOrderId}
     </update>
 
-    <update id="orderFinished" parameterType="com.wu.common.domain.MainOrder">
+    <update id="orderFinished" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         update Orchard.subOrder set orderStatus=6 where subOrderId = #{subOrderId}
     </update>
 
-    <update id="orderCancelled" parameterType="com.wu.common.domain.MainOrder">
+    <update id="orderCancelled" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         update Orchard.subOrder set orderStatus=7 where subOrderId = #{subOrderId}
     </update>
 
-    <delete id="removeFromShoppingCart" parameterType="com.wu.common.domain.MainOrder">
+    <delete id="removeFromShoppingCart" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         delete from Orchard.subOrder where subOrderId = #{subOrderId}
     </delete>
-
     <!--    orderReceived-->
-    <update id="orderReceived" parameterType="com.wu.common.domain.MainOrder">
+    <update id="orderReceived" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         update Orchard.subOrder set orderStatus=2 where goodId=#{orderId}
     </update>
 
-    <update
+    <update id="giftPending" parameterType="com.wu.common.domain.MainOrder$SubOrder">
+        update Orchard.subOrder set orderStatus=99 where subOrderId=#{subOrderId}
+    </update>
 
-<!--    -->
+<!--    insert update time-->
+    <insert id="itemIntoPresentGiving" parameterType="com.wu.common.domain.MainOrder$SubOrder">
+        insert into Orchard.PresentGiving values (#{senderId}, #{receiverId}, #{itemId}, #{presentGivingId}, #{createdTime})
+    </insert>
 
 </mapper>

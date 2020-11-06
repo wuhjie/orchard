@@ -4,6 +4,7 @@ import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Good;
 import com.wu.web.dao.OrderDao;
 import lombok.extern.slf4j.Slf4j;
+import org.jboss.jandex.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName MainOrderController
@@ -21,6 +23,7 @@ import java.util.List;
  * @Author wuhjie
  * @Data 2020/10/28 3:18 pm
  * @Version 1.0
+ * todo reassure the status
  **/
 
 @RestController
@@ -53,7 +56,7 @@ public class MainOrderController {
 
     @GetMapping("mainOrder/queryByCustomerId/{customerId}")
     public String queryAll(@PathVariable("customerId") Model model, String customerId) {
-        List<MainOrder.SubOrder> mainOrderCollection = orderDao.quertAll(customerId);
+        List<MainOrder.SubOrder> mainOrderCollection = orderDao.queryAllWithCustomerId(customerId);
         //todo
         model.addAttribute("orderWithCustomerId", mainOrderCollection);
         return "mainOrder/list";
@@ -113,10 +116,19 @@ public class MainOrderController {
     *done every 1am on Sundays
      **/
     @Scheduled(cron = "0 0 1 ? * L")
-    public String orderFinished(Model model, MainOrder subOrder) {
-        MainOrder.SubOrder newOrder = orderDao.orderFinished(subOrder.getMainOrderId());
-        model.addAttribute("orderFinished", newOrder);
-        return "redirect:/mainOrder";
+    public void orderReceived() {
+        try {
+            List<MainOrder.SubOrder> subOrders = orderDao.queryAll();
+            List<MainOrder.SubOrder> receivedOrders = subOrders.stream()
+                    .filter(subOrder -> subOrder.getOrderStatus() == MainOrder.SubOrder.OrderStatus.orderReceived)
+                    .collect(Collectors.toList());
+            for (MainOrder.SubOrder receivedOrder : receivedOrders) {
+                receivedOrder.setOrderStatus(MainOrder.SubOrder.OrderStatus.orderFinished);
+            }
+
+        } catch (Exception e) {
+
+        }
     }
 
     //todo
@@ -126,16 +138,38 @@ public class MainOrderController {
         return "redirect:/cancelled";
     }
 
+    /**
+     * auto check for unpaid items
+     */
+    @Scheduled(cron = "0 0 1 ? * L")
+    public void autoCheckForUnpaidOrder() {
+        try {
+            List<MainOrder.SubOrder> subOrders = orderDao.queryAll();
+            List<MainOrder.SubOrder> pendingOrders = subOrders.stream()
+                    .filter(subOrder -> subOrder.getOrderStatus() == MainOrder.SubOrder.OrderStatus.orderPending)
+                    .collect(Collectors.toList());
+            for (MainOrder.SubOrder pendingOrder : pendingOrders) {
+                pendingOrder.setOrderStatus(MainOrder.SubOrder.OrderStatus.orderCancelled);
+            }
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    //set the status in suborder into frozen and add it into the giftitem table
     public String giftPending(Model model, MainOrder.SubOrder subOrder) {
         MainOrder.GiftingItem giftingOrder = orderDao.giftPending(subOrder);
         //the order is frozen in this process
         subOrder.setOrderStatus(MainOrder.SubOrder.OrderStatus.orderFrozen);
+        //todo add order into the present gifting list
         model.addAttribute("giftPending", giftingOrder);
         return "customer/giftingCenter";
     }
 
     public String giftReceiving(Model model, MainOrder.GiftingItem giftingItem) {
-        orderDao.receivingItem(giftingItem);
+        // add the order into the presentGiving table
+        orderDao.itemIntoPresentGiving(giftingItem);
         String senderId = giftingItem.getSenderId();
         //making giftItem as a order and add it back to the sender orders
         orderDao.removeFromShoppingCart(giftingItem.getItemId(), senderId);

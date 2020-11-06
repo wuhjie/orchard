@@ -38,7 +38,7 @@ public class CompanyLoginController {
         }
     }
 
-    @RequestMapping("/user/logout")
+    @RequestMapping("/company/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/index.html";

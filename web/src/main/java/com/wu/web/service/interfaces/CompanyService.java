@@ -14,11 +14,11 @@ import java.util.List;
  **/
 public interface CompanyService {
 
-    boolean addCompany(Company compnay, HttpServletRequest request);
+    boolean addCompany(Company compnay);
 
-    Company queryByCompanyId(String companyId, HttpServletRequest request);
+    Company queryByCompanyId(String companyId);
 
     List<Company> queryAllCompany();
 
-    Company updateCompanyInfo(Company company, String newInfo);
+    Company updateCompanyInfo(Company company);
 }

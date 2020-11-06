@@ -21,19 +21,13 @@ public interface CompanyDao {
 
     boolean addCompany (Company company);
 
-    Company queryByCompanyId(String companyId, HttpServletRequest request);
+    boolean addCompanyDetail (Company.CompanyDetails companyDetails);
+
+    Company queryByCompanyId(String companyId);
 
     List<Company> queryAllCompany();
 
-//    Company updateCompanyInfo(Company company);
-
-    Company updateCompanyName(String companyId, String newCompanyName);
-
-    Company updateCompanyLocation(String companyId, String newLocation);
-
-    Company updateCompanyStatus(String companyId, Integer newStatus);
-
-    Company updateCompanyInfo(String companyId, String newCompanyInfo);
+    Company updateCompanyInfo(String companyId);
 
 
 }

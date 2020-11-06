@@ -42,7 +42,7 @@ public class Company {
     @Column
     Date createdTime;
 
-    @Column(columnDefinition = "Text")
+    @Column
     String companyInfo;
 
 
@@ -65,10 +65,15 @@ public class Company {
         Byte[] businessLicenseBack;
 
         @Column
-        Integer verificationStatus;
+        verificaitonStatus verificationStatus;
 
         public enum verificaitonStatus {
+            unverified(0, "this company hasn't be vatified"),
+            verified(1, "this company is verified"),
+            warning (2, "the company can't not be trusted");
 
+            verificaitonStatus(int code, String msg) {
+            }
         }
 
     }

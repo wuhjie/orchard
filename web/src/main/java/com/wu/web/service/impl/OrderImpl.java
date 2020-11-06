@@ -35,9 +35,9 @@ public class OrderImpl implements OrderService {
     }
 
     @Override
-    public List<MainOrder.SubOrder> queryAll(Customer customer) {
+    public List<MainOrder.SubOrder> queryAllWithCustomerId(String customerId) {
         setMainOrderDao(orderDao);
-        return orderDao.quertAll(customer.getCustomerId());
+        return orderDao.queryAllWithCustomerId(customerId);
     }
 
     @Override
@@ -118,6 +118,6 @@ public class OrderImpl implements OrderService {
     @Override
     public void receivingGift(MainOrder.GiftingItem giftingItem) {
         setMainOrderDao(orderDao);
-        orderDao.receivingItem(giftingItem);
+        orderDao.itemIntoPresentGiving(giftingItem);
     }
 }

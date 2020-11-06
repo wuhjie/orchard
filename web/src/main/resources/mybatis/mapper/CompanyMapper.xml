@@ -3,26 +3,24 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wu.web.dao.CompanyDao">
 
-    <insert id="addCustomer" parameterType="com.wu.common.domain.company.Company">
-        insert into Orchard.Company (companyId, companyName, companyLocation, companyStatus, createdTime, companyInfo)
-        values (#{companyId},#{companyName}, #{companyLocation}, #{companyStatus}, #{createdTime}, #{companyInfo});
+    <insert id="addCompany" parameterType="com.wu.common.domain.company.Company">
+        insert into Orchard.Company (companyId, companyName, companyLocation, companyStatus, createdTime, companyInfo) values (#{companyId},#{companyName}, #{companyLocation}, #{companyStatus}, #{createdTime}, #{companyInfo});
     </insert>
 
-    //todo
-    <insert id="addCustomerDetails" parameterType="com.wu.common.domain.company.Company$CompanyDetails">
-        insert into Orchard.CompanyDetails (companyId, businessLicense, businessLicenseBack, password, verificationStatus)
-        values (#{companyId},#{businessLicense}, #{businessLicenseBack}, #{password}, #{verificationStatus});
+    <insert id="addCompanyDetail" parameterType="com.wu.common.domain.company.Company$CompanyDetails">
+        insert into Orchard.CompanyDetails (companyId, businessLicense, businessLicenseBack, password, verificationStatus) VALUES (#{companyId}, #{businessLicense}, #{businessLicenseBack}, #{password}, #{verificationStatus});
+
     </insert>
 
-    <select id="queryById" resultType="com.wu.common.domain.company.Company" parameterType="String">
+    <select id="queryCompanyById" resultType="com.wu.common.domain.company.Company" parameterType="String">
         select * from Orchard.Company where companyId = #{customerId}
     </select>
 
-    <select id="queryAll" resultType="com.wu.common.domain.company.Company">
-        select * from Orchard.Company;
+    <select id="queryAllCompany" resultType="com.wu.common.domain.company.Company">
+        select * from Orchard.Company where companyId = ?;
     </select>
 
-    // todo
+
     <update id="updateCompanyInfo" parameterType="com.wu.common.domain.company.Company">
         update Orchard.Company set (companyName = #{companyName}, companyLocation = #{companyLocation}, companyStatus = #{companyStatus}, companyInfo = #{companyInfo}) where companyId = #{companyId};
 

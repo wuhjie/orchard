@@ -15,7 +15,7 @@ public interface CustomerService {
 
     boolean addCustomer (Customer customer);
 
-    Customer queryByCustomerId (String CustomerId);
+    Customer queryByCustomerId (String customerId);
 
     Customer queryByCustomerName(String customerName);
 
