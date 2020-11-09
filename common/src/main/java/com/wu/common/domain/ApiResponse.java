@@ -23,6 +23,7 @@ public class ApiResponse<T> {
     private String errDetails;
     private T data;
 
+    //1
     public static ApiResponse ok() {
         ApiResponse bean = new ApiResponse();
         bean.setCode(200);
@@ -31,6 +32,7 @@ public class ApiResponse<T> {
         return bean;
     }
 
+    //2
     public static ApiResponse ok(Object data) {
         ApiResponse bean = new ApiResponse();
         bean.setCode(200);
@@ -39,6 +41,7 @@ public class ApiResponse<T> {
         return bean;
     }
 
+    //3
     public static ApiResponse error(int code, String msg) {
         return error(code, msg);
     }

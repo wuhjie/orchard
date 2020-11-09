@@ -18,7 +18,7 @@ import java.util.List;
 @Repository
 public interface CustomerDao {
 
-    boolean addCustomer(Customer customer);
+    Customer addCustomer(Customer customer);
 
     Customer queryByCustomerId(String customerId);
 

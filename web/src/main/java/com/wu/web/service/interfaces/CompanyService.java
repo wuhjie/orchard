@@ -14,7 +14,7 @@ import java.util.List;
  **/
 public interface CompanyService {
 
-    boolean addCompany(Company compnay);
+    Company addCompany(Company compnay);
 
     Company queryByCompanyId(String companyId);
 

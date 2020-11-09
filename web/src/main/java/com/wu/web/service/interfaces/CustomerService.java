@@ -13,7 +13,7 @@ import java.util.List;
  **/
 public interface CustomerService {
 
-    boolean addCustomer (Customer customer);
+    Customer addCustomer (Customer customer);
 
     Customer queryByCustomerId (String customerId);
 

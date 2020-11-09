@@ -18,7 +18,7 @@ import java.util.List;
 @Repository
 public interface GoodDao {
 
-    boolean addGood(Good good);
+    Good addGood(Good good);
 
     Good queryById (String goodId);
 

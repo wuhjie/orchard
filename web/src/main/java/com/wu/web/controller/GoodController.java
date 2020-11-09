@@ -1,5 +1,6 @@
 package com.wu.web.controller;
 
+import com.wu.common.domain.ApiResponse;
 import com.wu.common.domain.company.Good;
 import com.wu.web.dao.GoodDao;
 import com.wu.web.dao.OrderDao;
@@ -40,22 +41,24 @@ public class GoodController {
     }
 
     @RequestMapping("/good/add")
-    public boolean addGood(Good good) {
-        return goodDao.addGood(good);
+    public ApiResponse<Good> addGood(Good good) {
+        Good addedGood = goodDao.addGood(good);
+        return ApiResponse.ok(addedGood);
     }
 
     @GetMapping("good/queryById/{goodId}")
-    public Good queryById(@PathVariable("goodId") String goodId) {
+    public ApiResponse<Good> queryById(@PathVariable("goodId") String goodId) {
         Good good = goodDao.queryById(goodId);
         if (good == null) {
             throw new RuntimeException("fail");
         }
-        return good;
+        return ApiResponse.ok(good);
     }
 
     @GetMapping("/good")
-    public List<Good> queryAll() {
-        return goodDao.queryAll();
+    public ApiResponse<List<Good>> queryAll() {
+        List<Good> goodCollection = goodDao.queryAll();
+        return ApiResponse.ok(goodCollection);
     }
 
 

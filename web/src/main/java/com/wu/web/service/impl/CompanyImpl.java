@@ -28,7 +28,7 @@ public class CompanyImpl implements CompanyService {
     }
 
     @Override
-    public boolean addCompany(Company company) {
+    public Company addCompany(Company company) {
         setCompanyDao(companyDao);
         return companyDao.addCompany(company);
     }

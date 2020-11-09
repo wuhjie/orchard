@@ -27,7 +27,7 @@ public class CustomerImpl implements CustomerService {
     }
 
     @Override
-    public boolean addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer) {
         setCustomerDao(customerDao);
 
         return customerDao.addCustomer(customer);

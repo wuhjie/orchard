@@ -1,5 +1,6 @@
 package com.wu.web.controller;
 
+import com.wu.common.domain.ApiResponse;
 import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Company;
 import com.wu.web.dao.CompanyDao;
@@ -33,29 +34,29 @@ public class CompanyController {
         this.companyDao = companyDao;
     }
 
-    public String addCompany(Company company, Company.CompanyDetails companyDetails) {
+    public ApiResponse<Company> addCompany(Company company, Company.CompanyDetails companyDetails) {
         // add both details for a company
-        companyDao.addCompany(company);
+        Company returnCompanyDao =  companyDao.addCompany(company);
         companyDao.addCompanyDetail(companyDetails);
-        return String.format("company/companyPortal%s", company.getCompanyId());
+
+        return ApiResponse.ok(returnCompanyDao);
     }
 
-    public String queryCompanyById(@PathVariable("companyId") String companyId, Model model) {
-        Company company = companyDao.queryByCompanyId(companyId);
-        model.addAttribute("queryCompanyById", company);
-        return "redirect:/company/list";
+    public ApiResponse<Company> queryCompanyById(@PathVariable("companyId") String companyId) {
+        Company newCompany = companyDao.queryByCompanyId(companyId);
+
+        return ApiResponse.ok(newCompany);
     }
 
-    public String queryAllCompany(Model model) {
+    public ApiResponse<List<Company>> queryAllCompany() {
         List<Company> companyList = companyDao.queryAllCompany();
-        model.addAttribute("queryAllCompany", companyList);
-        return "company/list";
+        return ApiResponse.ok(companyList);
     }
 
-    public String updateCompanyInfo (Model model, String companyId) {
+    //todo check if correct
+    public ApiResponse<Company> updateCompanyInfo (String companyId) {
         Company updatedCompany = companyDao.updateCompanyInfo(companyId);
-        model.addAttribute("updateCompanyInfo", updatedCompany);
-        return "redirect:/company/companyPortal";
+        return ApiResponse.ok(updatedCompany);
     }
 
 

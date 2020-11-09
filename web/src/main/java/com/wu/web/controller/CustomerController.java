@@ -1,5 +1,6 @@
 package com.wu.web.controller;
 
+import com.wu.common.domain.ApiResponse;
 import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.customer.Customer;
 import com.wu.web.dao.CustomerDao;
@@ -39,25 +40,24 @@ public class CustomerController {
 
     //create customer
     @RequestMapping("/customer/add")
-    public String addCustomer(Customer customer){
-        customerDao.addCustomer(customer);
-        return "redirect:/customer";
+    public ApiResponse<Customer> addCustomer(Customer customer){
+        Customer newCustomer = customerDao.addCustomer(customer);
+        return ApiResponse.ok(newCustomer);
     }
 
     @GetMapping("customer/queryById/{customerId}")
-    public Customer queryById(@PathVariable("customerId") String customerId) {
+    public ApiResponse<Customer> queryById(@PathVariable("customerId") String customerId) {
         Customer customer = customerDao.queryByCustomerId(customerId);
         if (customer == null) {
             throw new RuntimeException("fail");
         }
-        return customer;
+        return ApiResponse.ok(customer);
     }
 
     @GetMapping("/customer")
-    public String queryAll(Model model) {
+    public ApiResponse<Collection<Customer>> queryAll() {
         Collection<Customer> customerCollection = customerDao.queryAllCustomer();
-        model.addAttribute("customer", customerCollection);
-        return "customer/list";
+        return ApiResponse.ok(customerCollection);
     }
 
     /**
@@ -65,34 +65,31 @@ public class CustomerController {
      */
 
     @GetMapping("/customer/order")
-    public String purchase(Model model, List<MainOrder.SubOrder> orders) {
+    public ApiResponse<Collection<MainOrder.SubOrder>> purchase(List<MainOrder.SubOrder> orders) {
 
         List<MainOrder.SubOrder> newOrderCollection = new ArrayList<>();
         for (MainOrder.SubOrder order : orders) {
             newOrderCollection.add(orderDao.purchase(order));
         }
-        model.addAttribute("ordersMade", newOrderCollection);
-        return "customer/order";
+        return ApiResponse.ok(newOrderCollection);
     }
 
     @PostMapping("customer/order")
-    public String orderFinished(Model model, MainOrder.SubOrder subOrder) {
+    public ApiResponse<MainOrder> orderFinished(MainOrder.SubOrder subOrder) {
         MainOrder.SubOrder newOrder = orderDao.orderFinished(subOrder.getSubOrderId());
-        model.addAttribute("orderFinished", newOrder);
-        return "redirect:/customer";
+        return ApiResponse.ok(newOrder);
     }
 
     //todo
-    public String updateCustomerInfo(Model model, Customer customer) {
-        Customer newCustomer = customerDao.updateCustomerInfo(customer);
-        model.addAttribute("updateCustomerInfo", newCustomer);
-        return "redirect:/customerInfo";
+    public ApiResponse<Customer> updateCustomerInfo(Customer customer) {
+        customerDao.updateCustomerInfo(customer);
+        return ApiResponse.ok();
     }
 
-    public String displayCustomerInfo(Model model, String customerId) {
-        Customer currentCustomer = customerDao.queryByCustomerId(customerId);
-        model.addAttribute("displayCustomerInfo", currentCustomer);
-        return String.format("customer/personalPortal%s", customerId);
-    }
+//    public ApiResponse<Customer> displayCustomerInfo(String customerId) {
+//        Customer currentCustomer = customerDao.queryByCustomerId(customerId);
+//
+//        return String.format("customer/personalPortal%s", customerId);
+//    }
 
 }

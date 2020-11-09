@@ -19,7 +19,7 @@ import java.util.List;
 @Repository
 public interface CompanyDao {
 
-    boolean addCompany (Company company);
+    Company addCompany (Company company);
 
     boolean addCompanyDetail (Company.CompanyDetails companyDetails);
 
