@@ -27,7 +27,7 @@ public class GoodImpl implements GoodService {
     }
 
     @Override
-    public boolean addGood(Good good) {
+    public Good addGood(Good good) {
         setGoodDao(goodDao);
         return goodDao.addGood(good);
 

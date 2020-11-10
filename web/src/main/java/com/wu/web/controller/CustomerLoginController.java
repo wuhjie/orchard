@@ -1,8 +1,10 @@
 package com.wu.web.controller;
 
+import com.wu.common.domain.ApiResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,35 +26,27 @@ public class CustomerLoginController {
      * @param session
      * @return
      */
-    @RequestMapping("/user/login")
-    public String login (
+    @GetMapping("/customer/login")
+    public ApiResponse<HttpSession> login (
             @RequestParam("customerUserName") String customerUserName,
             @RequestParam("password") String password,
             Model model, HttpSession session) {
         if (!StringUtils.isEmpty(customerUserName) && "123".equals(password)) {
             session.setAttribute("user", customerUserName);
-            return "redirect:/main.html";
+            return ApiResponse.ok(session);
         }
-//        CustomerDao customerDao;
 
-
-//        Customer currentCustomer = customerDao.queryByCustomerName(customerUserName);
-//
-//        if {
-//
-//        }
-//
         else {
             model.addAttribute("msg", "wrong");
-            return "index";
+            return ApiResponse.error(3, "wrong password or not exist name");
         }
     }
 
 
-    @RequestMapping("/user/logout")
-    public String logout(HttpSession session) {
+    @RequestMapping("/customer/logout")
+    public ApiResponse<HttpSession> logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/index.html";
+        return ApiResponse.ok();
     }
 
 }

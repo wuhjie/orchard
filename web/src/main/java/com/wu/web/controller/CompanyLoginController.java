@@ -1,5 +1,7 @@
 package com.wu.web.controller;
 
+import com.wu.common.domain.ApiResponse;
+import org.apache.coyote.http11.Http11OutputBuffer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -23,25 +25,24 @@ public class CompanyLoginController {
      * todo
      */
     @RequestMapping("/company/login")
-    public String login (
+    public ApiResponse<HttpSession> login (
             @RequestParam("companyUserName") String companyUserName,
             @RequestParam("password") String password,
             Model model, HttpSession session) {
         if (!StringUtils.isEmpty(companyUserName) && "123".equals(password)) {
             session.setAttribute("user", companyUserName);
-            return "redirect:/main.html";
+            return ApiResponse.ok(session);
         }
 
         else {
-            model.addAttribute("msg", "wrong");
-            return "index";
+            return ApiResponse.error(3, "wrong password...");
         }
     }
 
     @RequestMapping("/company/logout")
-    public String logout(HttpSession session) {
+    public ApiResponse<HttpSession> logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/index.html";
+        return ApiResponse.ok();
     }
 
 }

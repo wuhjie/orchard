@@ -86,6 +86,11 @@ public class CustomerController {
         return ApiResponse.ok();
     }
 
+    @RequestMapping("customer/list")
+    public void firstAttempt() {
+        System.out.println(777);
+    }
+
 //    public ApiResponse<Customer> displayCustomerInfo(String customerId) {
 //        Customer currentCustomer = customerDao.queryByCustomerId(customerId);
 //

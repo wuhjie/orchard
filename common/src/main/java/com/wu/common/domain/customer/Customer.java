@@ -31,7 +31,7 @@ import java.util.UUID;
 @Accessors(chain = true)
 @Entity
 
-public class Customer implements Serializable {
+public class Customer {
 
     @Id
     @GeneratedValue

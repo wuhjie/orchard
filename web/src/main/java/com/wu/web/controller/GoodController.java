@@ -8,10 +8,7 @@ import com.wu.web.service.interfaces.GoodService;
 import com.wu.web.service.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -56,11 +53,8 @@ public class GoodController {
     }
 
     @GetMapping("/good")
-    public ApiResponse<List<Good>> queryAll() {
-        List<Good> goodCollection = goodDao.queryAll();
+    public ApiResponse<List<Good>> queryAll(@RequestParam List<Good> goodCollection) {
+        goodCollection = goodDao.queryAll();
         return ApiResponse.ok(goodCollection);
     }
-
-
-
 }

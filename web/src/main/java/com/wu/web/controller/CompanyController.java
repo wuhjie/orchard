@@ -7,10 +7,7 @@ import com.wu.web.dao.CompanyDao;
 import com.wu.web.service.interfaces.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -41,15 +38,15 @@ public class CompanyController {
 
         return ApiResponse.ok(returnCompanyDao);
     }
-
     public ApiResponse<Company> queryCompanyById(@PathVariable("companyId") String companyId) {
         Company newCompany = companyDao.queryByCompanyId(companyId);
 
         return ApiResponse.ok(newCompany);
     }
 
-    public ApiResponse<List<Company>> queryAllCompany() {
-        List<Company> companyList = companyDao.queryAllCompany();
+    @RequestMapping("/company")
+    public ApiResponse<List<Company>> queryAllCompany(@RequestParam List<Company> companyList) {
+        companyList = companyDao.queryAllCompany();
         return ApiResponse.ok(companyList);
     }
 

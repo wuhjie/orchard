@@ -9,10 +9,9 @@
 
     <insert id="addCompanyDetail" parameterType="com.wu.common.domain.company.Company$CompanyDetails">
         insert into Orchard.CompanyDetails (companyId, businessLicense, businessLicenseBack, password, verificationStatus) VALUES (#{companyId}, #{businessLicense}, #{businessLicenseBack}, #{password}, #{verificationStatus});
-
     </insert>
 
-    <select id="queryCompanyById" resultType="com.wu.common.domain.company.Company" parameterType="String">
+    <select id="queryByCompanyId" resultType="com.wu.common.domain.company.Company" parameterType="String">
         select * from Orchard.Company where companyId = #{customerId}
     </select>
 

@@ -13,7 +13,7 @@ import java.util.List;
  **/
 public interface GoodService {
 
-    boolean addGood(Good good);
+    Good addGood(Good good);
 
     Good queryById (String goodId);
 

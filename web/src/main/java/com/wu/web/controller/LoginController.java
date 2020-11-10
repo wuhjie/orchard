@@ -1,5 +1,6 @@
 package com.wu.web.controller;
 
+import com.wu.common.domain.ApiResponse;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -15,8 +16,8 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @GetMapping("/index")
-    public String loadMainPage (Model model, HttpSession session) {
-        return "index.html";
+    public String loadMainPage () {
+        return "first Step";
     }
 
 }
