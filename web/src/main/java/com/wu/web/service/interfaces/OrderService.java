@@ -19,6 +19,8 @@ public interface OrderService {
 
     MainOrder.SubOrder queryWithItemId(String goodId);
 
+    public List<MainOrder.SubOrder> queryAll();
+
     List<MainOrder.SubOrder> queryAllWithCustomerId(String customerId);
 
     MainOrder.SubOrder purchase(MainOrder.SubOrder subOrder);

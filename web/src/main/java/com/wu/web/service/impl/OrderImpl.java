@@ -45,6 +45,7 @@ public class OrderImpl implements OrderService {
         return orderDao.queryWithItemId(goodId);
     }
 
+    @Override
     public List<MainOrder.SubOrder> queryAll() {
         setMainOrderDao(orderDao);
         return orderDao.queryAll();
