@@ -2,12 +2,9 @@ package com.wu.web.controller;
 
 import com.wu.common.domain.ApiResponse;
 import com.wu.common.domain.company.Good;
-import com.wu.web.dao.GoodDao;
-import com.wu.web.dao.OrderDao;
 import com.wu.web.service.interfaces.GoodService;
 import com.wu.web.service.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,40 +18,33 @@ import java.util.List;
  **/
 
 @RestController
+@RequestMapping("/good")
 public class GoodController {
 
-
-    GoodDao goodDao;
-    OrderDao orderDao;
-
     @Autowired
-    public void setGoodDao (GoodDao goodDao) {
-        this.goodDao = goodDao;
-    }
-
+    GoodService goodService;
+    
     @Autowired
-    public void setOrderService(OrderDao orderDao) {
-        this.orderDao = orderDao;
-    }
+    OrderService orderService;
 
-    @RequestMapping("/good/add")
+    @RequestMapping("/add")
     public ApiResponse<Good> addGood(Good good) {
-        Good addedGood = goodDao.addGood(good);
+        Good addedGood = goodService.addGood(good);
         return ApiResponse.ok(addedGood);
     }
 
-    @GetMapping("good/queryById/{goodId}")
+    @GetMapping("/queryById/{goodId}")
     public ApiResponse<Good> queryById(@PathVariable("goodId") String goodId) {
-        Good good = goodDao.queryById(goodId);
+        Good good = goodService.queryById(goodId);
         if (good == null) {
             throw new RuntimeException("fail");
         }
         return ApiResponse.ok(good);
     }
 
-    @GetMapping("/good")
-    public ApiResponse<List<Good>> queryAll(@RequestParam List<Good> goodCollection) {
-        goodCollection = goodDao.queryAll();
+    @GetMapping("/list")
+    public ApiResponse<List<Good>> queryAll() {
+        List<Good> goodCollection = goodService.queryAll();
         return ApiResponse.ok(goodCollection);
     }
 }

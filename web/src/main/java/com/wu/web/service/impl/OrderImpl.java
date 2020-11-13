@@ -2,7 +2,6 @@ package com.wu.web.service.impl;
 
 import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Good;
-import com.wu.common.domain.customer.Customer;
 import com.wu.web.dao.OrderDao;
 import com.wu.web.service.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,12 @@ public class OrderImpl implements OrderService {
 
     private OrderDao orderDao;
 
+    @Override
+    public MainOrder.SubOrder addOrder(MainOrder.SubOrder subOrder) {
+        setMainOrderDao(orderDao);
+        return orderDao.addOrder(subOrder);
+    }
+
     @Autowired
     public void setMainOrderDao(OrderDao orderDao) {
         this.orderDao = orderDao;
@@ -32,6 +37,17 @@ public class OrderImpl implements OrderService {
     public MainOrder.SubOrder queryByOrderId(String orderId) {
         setMainOrderDao(orderDao);
         return orderDao.queryByOrderId(orderId);
+    }
+
+    @Override
+    public MainOrder.SubOrder queryWithItemId(String goodId) {
+        setMainOrderDao(orderDao);
+        return orderDao.queryWithItemId(goodId);
+    }
+
+    public List<MainOrder.SubOrder> queryAll() {
+        setMainOrderDao(orderDao);
+        return orderDao.queryAll();
     }
 
     @Override
@@ -120,4 +136,5 @@ public class OrderImpl implements OrderService {
         setMainOrderDao(orderDao);
         orderDao.itemIntoPresentGiving(giftingItem);
     }
+
 }

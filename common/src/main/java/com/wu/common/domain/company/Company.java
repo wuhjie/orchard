@@ -1,6 +1,5 @@
 package com.wu.common.domain.company;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +7,7 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @ClassName Company
@@ -17,8 +17,8 @@ import java.util.Date;
  * @Version 1.0
  **/
 
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -45,8 +45,20 @@ public class Company {
     @Column
     String companyInfo;
 
+    public Company(String companyName, String companyLocation, Integer companyStatus, Date createdTime, String companyInfo) {
+        this.companyId = UUID.randomUUID().toString();
+        this.companyName = companyName;
+        this.companyLocation = companyLocation;
+        this.companyStatus = companyStatus;
+        this.createdTime = createdTime;
+        this.companyInfo = companyInfo;
+    }
 
-    @AllArgsConstructor
+    public Company() {
+
+    }
+
+    //    @AllArgsConstructor
     @NoArgsConstructor
     @Getter
     @Setter
@@ -67,7 +79,14 @@ public class Company {
         @Column
         verificaitonStatus verificationStatus;
 
-        public enum verificaitonStatus {
+    public CompanyDetails(Byte[] businessLicense, Byte[] businessLicenseBack, verificaitonStatus verificationStatus) {
+        this.companyId = getCompanyId();
+        this.businessLicense = businessLicense;
+        this.businessLicenseBack = businessLicenseBack;
+        this.verificationStatus = verificationStatus;
+    }
+
+    public enum verificaitonStatus {
             unverified(0, "this company hasn't be vatified"),
             verified(1, "this company is verified"),
             warning (2, "the company can't not be trusted");

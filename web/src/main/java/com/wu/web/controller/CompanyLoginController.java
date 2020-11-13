@@ -1,12 +1,14 @@
 package com.wu.web.controller;
 
 import com.wu.common.domain.ApiResponse;
+import com.wu.web.service.impl.CompanyImpl;
 import org.apache.coyote.http11.Http11OutputBuffer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,12 +20,15 @@ import javax.servlet.http.HttpSession;
  * @Version 1.0
  **/
 
-@Controller
+@RestController
 public class CompanyLoginController {
 
     /**
      * todo
      */
+
+    CompanyImpl companyimpl;
+
     @RequestMapping("/company/login")
     public ApiResponse<HttpSession> login (
             @RequestParam("companyUserName") String companyUserName,

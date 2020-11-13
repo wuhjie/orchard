@@ -11,6 +11,7 @@ import java.util.List;
  * @Data 2020/10/26 3:10 pm
  * @Version 1.0
  **/
+
 public interface GoodService {
 
     Good addGood(Good good);

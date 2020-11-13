@@ -23,6 +23,8 @@ public interface OrderDao {
 
     MainOrder.SubOrder queryByOrderId (String orderId);
 
+    MainOrder.SubOrder queryWithItemId (String goodId);
+
     List<MainOrder.SubOrder> queryAllWithCustomerId (String customerId);
 
     List<MainOrder.SubOrder> queryAll ();
@@ -54,5 +56,7 @@ public interface OrderDao {
     MainOrder.GiftingItem giftPending (MainOrder.SubOrder subOrder);
 
     void itemIntoPresentGiving (MainOrder.GiftingItem giftingItem);
+
+
 
 }

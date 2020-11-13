@@ -34,6 +34,12 @@ public class CompanyImpl implements CompanyService {
     }
 
     @Override
+    public Company.CompanyDetails addCompanyDetails(Company.CompanyDetails companyDetails) {
+        setCompanyDao(companyDao);
+        return companyDao.addCompanyDetail(companyDetails);
+    }
+
+    @Override
     public Company queryByCompanyId(String companyId) {
         setCompanyDao(companyDao);
         return companyDao.queryByCompanyId(companyId);

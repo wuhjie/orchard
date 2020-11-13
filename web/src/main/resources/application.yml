@@ -1,6 +1,7 @@
 server:
   port: 8080
-
+  servlet:
+    context-path: /wu-web
 
 spring:
   application:
@@ -13,6 +14,9 @@ spring:
   thymeleaf:
     cache: false
 
+
+
+
 #    suffix: .ftl
 
 
@@ -20,6 +24,8 @@ mybatis:
   type-aliases-package: com.wu.web.dao
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:/resources/mybatis/mapper/*.xml
+
+
 
 
 

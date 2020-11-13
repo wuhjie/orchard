@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.wu.common", "com.wu.web"})
-@MapperScan(value = {"com.wu.common", "com.wu.web"})
+@MapperScan(value = {"com.wu.web.dao"})
 
 public class WebApplication {
 

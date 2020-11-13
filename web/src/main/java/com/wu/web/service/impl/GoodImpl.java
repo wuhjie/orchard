@@ -19,29 +19,24 @@ import java.util.List;
 @Service
 public class GoodImpl implements GoodService {
 
+    @Autowired
     private GoodDao goodDao;
 
-    @Autowired
-    public void setGoodDao(GoodDao goodDao) {
-        this.goodDao = goodDao;
-    }
 
     @Override
     public Good addGood(Good good) {
-        setGoodDao(goodDao);
         return goodDao.addGood(good);
 
     }
 
     @Override
     public Good queryById(String goodId) {
-        setGoodDao(goodDao);
+
         return goodDao.queryById(goodId);
     }
 
     @Override
     public List<Good> queryAll() {
-        setGoodDao(goodDao);
         return goodDao.queryAll();
     }
 }

@@ -1,9 +1,5 @@
 package com.wu.common.domain.customer;
 
-//import com.wu.common.domain.garden.Garden;
-//import com.wu.common.basic.MainOrder;
-//import com.wu.common.domain.garden.Tree;
-//import com.wu.common.basic.platform.Wallet;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +12,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 

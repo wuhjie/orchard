@@ -21,7 +21,7 @@ public interface CompanyDao {
 
     Company addCompany (Company company);
 
-    boolean addCompanyDetail (Company.CompanyDetails companyDetails);
+    Company.CompanyDetails addCompanyDetail (Company.CompanyDetails companyDetails);
 
     Company queryByCompanyId(String companyId);
 

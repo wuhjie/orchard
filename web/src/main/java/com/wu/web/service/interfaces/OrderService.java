@@ -2,9 +2,6 @@ package com.wu.web.service.interfaces;
 
 import com.wu.common.domain.MainOrder;
 import com.wu.common.domain.company.Good;
-import com.wu.common.domain.customer.Customer;
-import org.jboss.jandex.Main;
-
 import java.util.List;
 
 /**
@@ -16,9 +13,11 @@ import java.util.List;
  **/
 public interface OrderService {
 
-//    MainOrder.subOrder addOrder(MainOrder mainOrder);
+    MainOrder.SubOrder addOrder(MainOrder.SubOrder subOrder);
 
     MainOrder.SubOrder queryByOrderId(String orderId);
+
+    MainOrder.SubOrder queryWithItemId(String goodId);
 
     List<MainOrder.SubOrder> queryAllWithCustomerId(String customerId);
 
@@ -48,6 +47,9 @@ public interface OrderService {
     MainOrder.GiftingItem giftPending (MainOrder.SubOrder subOrder);
 
     void receivingGift (MainOrder.GiftingItem giftingItem);
+
+//    void itemIntoPresentGiving (MainOrder.GiftingItem giftingItem);
+
 
 
 }

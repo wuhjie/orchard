@@ -11,6 +11,10 @@
 
 <!--    queryBuOrderId-->
     <select id="queryByOrderId" parameterType="com.wu.common.domain.MainOrder$SubOrder">
+        select * from Orchard.subOrder where subOrderId = #{orderId}
+    </select>
+
+    <select id="queryWithItemId" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         select * from Orchard.subOrder where goodId = #{orderId}
     </select>
 

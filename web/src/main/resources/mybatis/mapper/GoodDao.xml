@@ -13,7 +13,7 @@
     </select>
 
     <select id="queryAll" resultType="com.wu.common.domain.company.Good">
-        select * from Orchard.Good where goodId = ?;
+        select * from Orchard.Good;
     </select>
 
 </mapper>

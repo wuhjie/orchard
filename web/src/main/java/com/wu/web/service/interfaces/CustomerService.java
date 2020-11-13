@@ -2,6 +2,7 @@ package com.wu.web.service.interfaces;
 
 import com.wu.common.domain.customer.Customer;
 
+
 import java.util.List;
 
 /**
@@ -11,6 +12,7 @@ import java.util.List;
  * @Data 2020/10/26 9:24 am
  * @Version 1.0
  **/
+
 public interface CustomerService {
 
     Customer addCustomer (Customer customer);
