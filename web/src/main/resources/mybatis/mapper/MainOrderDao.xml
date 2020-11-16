@@ -4,7 +4,7 @@
 <mapper namespace="com.wu.web.dao.OrderDao">
 
 <!--    addOrder-->
-    <insert id="addOrder" parameterType="com.wu.common.domain.MainOrder">
+    <insert id="addOrder" parameterType="com.wu.common.domain.MainOrder$SubOrder">
         insert into Orchard.subOrder (customerId, goodId, goodPrice, shippingPrice, createdTime, finishedTime, orderStatus, shippingAddress, goodName, companyId, companyName, deliveryAddress, amount, expressId, subOrderId)
         values (#{customerId}, #{goodId}, #{goodPrice}, #{shippingPrice}, #{createdTime}, #{finishedTime}, #{orderStatus}, #{shippingAddress}, #{goodName}, #{companyId}, #{companyName}, #{deliveryAddress}, #{amount}, #{expressId}, #{subOrderId})
     </insert>

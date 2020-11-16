@@ -23,7 +23,9 @@ public class ApiResponse<T> {
     private String errDetails;
     private T data;
 
-    //1
+    /*
+     * 1:
+     */
     public static ApiResponse ok() {
         ApiResponse bean = new ApiResponse();
         bean.setCode(200);
@@ -32,27 +34,33 @@ public class ApiResponse<T> {
         return bean;
     }
 
-    //2
+    /*
+     * 2:success with data
+     */
     public static ApiResponse ok(Object data) {
         ApiResponse bean = new ApiResponse();
         bean.setCode(200);
         bean.setMsg("success");
+        bean.setData(data);
 
         return bean;
     }
 
-    //3
+    /*
+     * 3:error
+     */
     public static ApiResponse error(int code, String msg) {
-        return error(code, msg);
+
+        return error(code, msg, null);
     }
 
     public static ApiResponse error(int code, String msg, String errDetails) {
-        ApiResponse bean = new ApiResponse();
-        bean.setCode(code);
-        bean.setMsg(msg);
-        bean.setErrDetails(errDetails);
+        ApiResponse resultBean = new ApiResponse();
+        resultBean.setCode(code);
+        resultBean.setMsg(msg);
+        resultBean.setErrDetails(errDetails);
 
-        return error(code, msg);
+        return resultBean;
     }
 
 }

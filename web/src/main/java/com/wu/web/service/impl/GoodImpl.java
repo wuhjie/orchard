@@ -37,6 +37,7 @@ public class GoodImpl implements GoodService {
 
     @Override
     public List<Good> queryAll() {
-        return goodDao.queryAll();
+        List<Good>  goo = goodDao.queryAll();
+        return goo;
     }
 }

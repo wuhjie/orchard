@@ -29,10 +29,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/order")
 public class MainOrderController {
 
-    OrderService orderService;
-
     @Autowired
-   
+    OrderService orderService;
 
     @RequestMapping("/add")
     public ApiResponse<MainOrder.SubOrder> addOrder(MainOrder.SubOrder subOrder) {
